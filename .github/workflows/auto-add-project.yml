@@ -19,5 +19,5 @@ jobs:
           # to the issue
           project-url: https://github.com/orgs/CodeAcademyBerlin/projects/15
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
-          labeled: bug, needs-triage
+          labeled: bug, needs-triage, needs-review
           label-operator: OR
