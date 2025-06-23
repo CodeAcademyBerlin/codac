@@ -1,90 +1,81 @@
 name: ✨ Feature Request
-description: Suggest a new feature or enhancement
+description: Suggest an idea for this project
 title: "[Feature]: "
-labels: ["type: feature", "needs-triage"]
-assignees: []
-
+labels: ["enhancement", "needs-discussion"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for suggesting a new feature! ✨
-        We love hearing ideas from our community. Please fill out this form to help us understand your suggestion.
+        Thanks for taking the time to suggest a new feature! 🚀
+
+        **Before you start:** Please search existing issues to see if someone already suggested this feature.
 
   - type: textarea
     id: problem
     attributes:
-      label: 💡 Idea/Problem Statement
-      description: What problem does this feature solve? What's currently difficult or impossible to do?
-      placeholder: |
-        Describe your idea. What should it look like? How should it work?
-        Include specific details about the user interface, functionality, etc.
-        Example: "As a student, I find it difficult to track my progress across multiple courses because..."
-        or "Currently there's no way to..."
-        or "I want to be able to..."
+      label: Is your feature request related to a problem?
+      description: A clear description of what the problem is
+      placeholder: I'm always frustrated when...
+    validations:
+      required: false
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Describe the solution you'd like
+      description: A clear description of what you want to happen
+      placeholder: I would like to be able to...
     validations:
       required: true
 
-  - type: dropdown
-    id: user-type
+  - type: textarea
+    id: alternatives
     attributes:
-      label: 👤 Who would benefit?
-      description: Which type of users would benefit most from this feature?
-      multiple: true
-      options:
-        - Students
-        - Alumni
-        - Mentors
-        - Instructors
-        - Administrators
-        - All users
+      label: Describe alternatives you've considered
+      description: A clear description of any alternative solutions you've thought of
+      placeholder: I considered...
     validations:
-      required: true
+      required: false
 
   - type: dropdown
     id: priority
     attributes:
-      label: 📈 Priority Level
-      description: How important is this feature to you?
+      label: How important is this feature to you?
       options:
-        - "🔥 High - This would significantly improve my experience"
-        - "📊 Medium - This would be a nice improvement"
-        - "📝 Low - This would be a small enhancement"
+        - Nice to have
+        - Would be helpful
+        - Important
+        - Critical
     validations:
       required: true
 
-  - type: dropdown
-    id: complexity
+  - type: checkboxes
+    id: user-types
     attributes:
-      label: 🧩 Estimated Complexity
-      description: How complex do you think this feature would be to implement?
+      label: Who would benefit from this feature?
+      description: Select all that apply
       options:
-        - "🟢 Simple - Small UI change or minor functionality"
-        - "🟡 Medium - New component or moderate feature"
-        - "🔴 Complex - Major feature requiring significant development"
-        - "❓ I'm not sure"
-    validations:
-      required: true
+        - label: Students
+        - label: Alumni
+        - label: Mentors
+        - label: Instructors
+        - label: Administrators
+        - label: Everyone
 
-  - type: markdown
+  - type: textarea
+    id: additional-context
     attributes:
-      value: |
-        ### 🌟 Thank you for your suggestion!
+      label: Additional context
+      description: Add any other context, screenshots, or examples about the feature request here
+      placeholder: Any mockups, examples from other apps, or additional details?
 
-        Feature requests help shape the future of CODAC and make it better for everyone.
-
-        **What happens next?**
-        1. The community and maintainers will review your request
-        2. We'll discuss feasibility and priority
-        3. The request will be labeled and potentially added to our roadmap
-        4. Community members may volunteer to implement it
-
-        **Want to implement this yourself?**
-        - Check out our [Contributing Guide](../../CONTRIBUTING.md)
-        - Join our community discussions to get help and feedback
-        - Start with smaller issues to get familiar with the codebase
-
-        **Help us prioritize:**
-        - 👍 Give this issue a thumbs up if you want this feature
-        - 💬 Comment with additional use cases or requirements
-        - 🔄 Share with other community members who might benefit
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Before submitting
+      description: Please confirm the following
+      options:
+        - label: I have searched existing issues to see if this feature was already requested
+          required: true
+        - label: I have described the feature clearly and completely
+          required: true

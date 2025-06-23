@@ -1,152 +1,86 @@
 name: 🐛 Bug Report
-description: Report a bug or unexpected behavior
+description: File a bug report to help us improve
 title: "[Bug]: "
-labels: ["type: bug", "needs-triage"]
-assignees: []
-
+labels: ["bug", "needs-triage"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to report a bug! 🐛
+        Thanks for taking the time to fill out this bug report! 🙏
 
-        Please fill out this form as completely as possible to help us understand and fix the issue.
-        Don't worry if you're not sure about some fields - just fill out what you can!
+        **Before you start:** Please search existing issues to see if someone already reported this bug.
 
   - type: textarea
-    id: description
+    id: what-happened
     attributes:
-      label: 📝 Bug Description
-      description: A clear and concise description of what the bug is
-      placeholder: Describe what happened and what you expected to happen instead
+      label: What happened?
+      description: A clear description of what the bug is
+      placeholder: Tell us what you see!
     validations:
       required: true
 
   - type: textarea
-    id: reproduction
+    id: expected-behavior
     attributes:
-      label: 🔄 Steps to Reproduce
-      description: Step-by-step instructions to reproduce the bug
+      label: What did you expect to happen?
+      description: A clear description of what you expected to happen
+      placeholder: Tell us what you expected!
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Steps to reproduce the behavior
       placeholder: |
         1. Go to '...'
         2. Click on '...'
         3. Scroll down to '...'
         4. See error
     validations:
-      required: false
-
-  - type: textarea
-    id: expected
-    attributes:
-      label: ✅ Expected Behavior
-      description: What did you expect to happen?
-      placeholder: Describe what should have happened instead
-    validations:
-      required: false
-
-  - type: textarea
-    id: actual
-    attributes:
-      label: ❌ Actual Behavior
-      description: What actually happened?
-      placeholder: Describe what actually happened (include error messages if any)
-    validations:
-      required: false
+      required: true
 
   - type: textarea
     id: screenshots
     attributes:
-      label: 📸 Screenshots/Videos
-      description: If applicable, add screenshots or videos to help explain the problem
-      placeholder: Drag and drop images/videos here, or paste links
+      label: Screenshots
+      description: If applicable, add screenshots to help explain your problem
+      placeholder: Drag and drop images here, or click to select files
 
   - type: dropdown
-    id: browser
+    id: browsers
     attributes:
-      label: 🌐 Browser
-      description: Which browser are you using?
+      label: What browsers are you seeing the problem on?
+      multiple: true
       options:
         - Chrome
         - Firefox
         - Safari
-        - Edge
-        - Other (please specify in additional context)
-    validations:
-      required: false
+        - Microsoft Edge
+        - Other
 
-  - type: dropdown
-    id: device
-    attributes:
-      label: 📱 Device Type
-      description: What type of device are you using?
-      options:
-        - Desktop
-        - Mobile
-        - Tablet
-    validations:
-      required: true
-
-  - type: dropdown
+  - type: input
     id: operating-system
     attributes:
-      label: 💻 Operating System
-      description: Which operating system are you using?
-      options:
-        - Windows
-        - macOS
-        - Linux
-        - iOS
-        - Android
-        - Other (please specify in additional context)
-    validations:
-      required: false
-
-  - type: textarea
-    id: console-errors
-    attributes:
-      label: 🔍 Console Errors
-      description: |
-        Any errors in the browser console? 
-        (Press F12 → Console tab to check)
-      placeholder: |
-        Paste any error messages from the browser console here
-        If you don't see any errors, you can write "No console errors"
-      render: text
+      label: Operating System
+      description: What operating system are you using?
+      placeholder: e.g., Windows 11, macOS Monterey, Ubuntu 20.04
 
   - type: textarea
     id: additional-context
     attributes:
-      label: 📋 Additional Context
-      description: |
-        Add any other context about the problem here
-        - Does this happen every time or only sometimes?
-        - Did this work before? When did it stop working?
-        - Any other details that might help us understand the issue
-      placeholder: Any additional information that might be helpful
+      label: Additional context
+      description: Add any other context about the problem here
+      placeholder: Anything else you think might be helpful?
 
   - type: checkboxes
     id: terms
     attributes:
-      label: 📋 Checklist
+      label: Before submitting
       description: Please confirm the following
       options:
-        - label: I understand this is a volunteer-maintained project and maintainers will respond when they can
-          required: false
-
-  - type: markdown
-    attributes:
-      value: |
-        ### 🙏 Thank you!
-
-        Your bug report helps make CODAC better for everyone. 
-
-        **What happens next?**
-        1. A maintainer will review your issue (usually within 1-2 days)
-        2. We may ask for more information if needed
-        3. The issue will be labeled and prioritized
-        4. Someone will work on fixing it (could be you! 😊)
-
-        **Want to help fix this bug?**
-        - Check out our [Contributing Guide](../../CONTRIBUTING.md)
-        - Look for issues labeled `good first issue` if you're new
-        - Join our community discussions for help getting started
+        - label: I have searched existing issues to see if this bug was already reported
+          required: true
+        - label: I have included all the information requested above
+          required: true
