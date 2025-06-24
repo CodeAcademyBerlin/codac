@@ -6,11 +6,11 @@
 
 codac empowers Code Academy Berlin students and alumni to learn, collaborate, and grow together through a modern, integrated platform that combines educational content delivery with vibrant community features.
 
-## ✨ Key Features to be implemente
+## ✨ Key Features to be implemented
 
 ### 📚 Learning Management System
 
-- **Rich Content Editor** - Powered by Plate.js for creating engaging educational content with advanced formatting, media embedding, and collaborative editing capabilities
+- **Rich Content Editor** - for creating engaging educational content with advanced formatting, media embedding, and collaborative editing capabilities
 - **Document Management** - Comprehensive document creation, editing, and sharing system with version control and real-time collaboration
 - **Course Structure** - Organized learning paths with projects, lessons, and assignments
 - **Progress Tracking** - Detailed analytics on learning progress, completion rates, and time spent on various activities
@@ -44,14 +44,16 @@ codac empowers Code Academy Berlin students and alumni to learn, collaborate, an
 
 ## 🛠 Tech Stack
 
-- **Next.js v15**: A React framework that enables server-side rendering and static site generation
-- **Drizzle ORM**: A lightweight TypeScript ORM for SQL databases, providing a simple and type-safe way to interact with your database
-- **Tailwind CSS**: A utility-first CSS framework for rapid UI development
-- **TypeScript**: A strongly typed programming language that builds on JavaScript, giving you better tooling at any scale
+- **[Next.js 15](https://nextjs.org/)** for performance and scalability.
+- **[Auth.js](https://auth.js.org/)** for authentication.
+- **[Drizzle ORM](https://orm.drizzle.team/)** for type-safe database management.
+- **[SQLite](https://www.sqlite.org/)** for lightweight, serverless database management.
+- **[Shadcn/UI](https://ui.shadcn.com/)** for beautiful, customizable components.
+- **[Jest](https://jestjs.io/)** A testing framework for ensuring your app works as expected.
 - **React Hook Form**: A library for managing form state and validation in React applications
 - **Zod**: A TypeScript-first schema declaration and validation library
 - **Zustand**: Simple state management
-- **Nuq**: Type-safe URL state management
+- **Nuqs**: Type-safe URL state management
 
 ## 🚀 Quick Start
 
