@@ -1,0 +1,52 @@
+{
+  "name": "codac",
+  "version": "0.1.0",
+  "description": "Comprehensive learning management system and community platform for Code Academy Berlin",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "type-check": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "next": "^15.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "typescript": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "eslint": "^8.0.0",
+    "eslint-config-next": "^15.0.0",
+    "prettier": "^3.0.0",
+    "tailwindcss": "^3.0.0"
+  },
+  "keywords": [
+    "learning-management-system",
+    "community-platform",
+    "education",
+    "nextjs",
+    "typescript",
+    "react"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/code-academy-berlin/codac.git"
+  },
+  "bugs": {
+    "url": "https://github.com/code-academy-berlin/codac/issues"
+  },
+  "homepage": "https://github.com/code-academy-berlin/codac#readme",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}

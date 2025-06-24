@@ -1,0 +1,57 @@
+name: 🐛 Bug Report
+description: File a bug report to help us improve
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! 🙏
+
+        **Before you start:** Please search existing issues to see if someone already reported this bug.
+
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: What happened and what did you expect instead?
+      description: Describe the bug and what you expected to happen
+      placeholder: |
+        **What happened:** Tell us what you see...
+        
+        **Expected behavior:** Tell us what you expected...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Steps to reproduce the behavior
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment-context
+    attributes:
+      label: Environment and additional context
+      description: Include your OS, browser, screenshots, and any other relevant details
+      placeholder: |
+        **OS:** e.g., Windows 11, macOS, Ubuntu
+        **Browser:** e.g., Chrome, Firefox, Safari
+        **Screenshots:** (drag and drop images here)
+        **Additional context:** Anything else that might be helpful
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Before submitting
+      description: Please confirm the following
+      options:
+        - label: I have searched existing issues to see if this bug was already reported
+          required: true
+        - label: I have included all the information requested above
+          required: true
