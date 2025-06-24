@@ -12,19 +12,8 @@ jobs:
   add-to-project:
     name: Add issue or PR to project
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
-      pull-requests: write
     steps:
-      - name: Add needs-triage label
-        if: github.event_name == 'pull_request'
-        uses: actions-ecosystem/action-add-labels@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          labels: 'needs-triage'
-
-      - name: Add to project
-        uses: actions/add-to-project@v1.0.2
+      - uses: actions/add-to-project@v1.0.2
         with:
           # You can target a project in a different organization
           # to the issue
@@ -32,26 +21,3 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           labeled: bug, needs-triage, needs-review
           label-operator: OR
-
-      - name: Create related issue for PR
-        if: github.event_name == 'pull_request' && !contains(github.event.pull_request.body, 'Closes') && !contains(github.event.pull_request.body, 'Fixes')
-        uses: dacbd/create-issue-action@main
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          title: "Review: ${{ github.event.pull_request.title }}"
-          body: |
-            This issue tracks the review and discussion for PR #${{ github.event.pull_request.number }}.
-            
-            **PR Title:** ${{ github.event.pull_request.title }}
-            **PR Author:** @${{ github.event.pull_request.user.login }}
-            **PR URL:** ${{ github.event.pull_request.html_url }}
-            
-            ## Description
-            ${{ github.event.pull_request.body }}
-            
-            ## Review Checklist
-            - [ ] Code review completed
-            - [ ] Tests pass
-            - [ ] Documentation updated if needed
-            - [ ] Ready to merge
-          labels: needs-review,pr-review

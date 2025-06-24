@@ -1,0 +1,51 @@
+name: Auto Label PR
+
+on:
+  pull_request:
+    types: [opened, edited]
+
+permissions:
+  pull-requests: write
+  issues: write
+
+jobs:
+  auto-label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto Label Based on PR Template
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prBody = context.payload.pull_request.body || '';
+            const labels = ['needs-triage'];
+            
+            // Define mapping of checkbox patterns to labels
+            const labelMappings = [
+              { pattern: /- \[x\] 🐛 Bug fix/, label: 'bug' },
+              { pattern: /- \[x\] ✨ New feature/, label: 'enhancement' },
+              { pattern: /- \[x\] 💥 Breaking change/, label: 'breaking-change' },
+              { pattern: /- \[x\] 📚 Documentation update/, label: 'documentation' },
+              { pattern: /- \[x\] 🧹 Code cleanup\/refactoring/, label: 'refactor' },
+              { pattern: /- \[x\] 🔧 Configuration change/, label: 'config' }
+                           ];
+            
+            // Check which checkboxes are selected and collect labels
+            labelMappings.forEach(mapping => {
+              if (mapping.pattern.test(prBody)) {
+                labels.push(mapping.label);
+              }
+            });
+            
+            // Apply labels if any were found
+            if (labels.length > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.payload.pull_request.number,
+                labels: labels
+              });
+              
+              console.log(`Applied labels: ${labels.join(', ')}`);
+            } else {
+              console.log('No checkboxes were selected, no labels applied');
+            } 
