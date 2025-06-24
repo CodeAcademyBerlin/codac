@@ -23,28 +23,6 @@
 - [ ] 🧹 Code cleanup/refactoring
 - [ ] 🔧 Configuration change
 
-## 🚀 How Has This Been Tested?
-
-<!-- Describe the tests you ran to verify your changes -->
-
-- [ ] I have tested this locally
-- [ ] All existing tests pass
-- [ ] I have added new tests for my changes
-
-## 📋 Checklist
-
-<!-- Mark completed items with an "x" -->
-
-- [ ] My code follows the project's coding standards
-- [ ] I have performed a self-review of my code
-- [ ] I have commented my code where necessary
-- [ ] My changes generate no new warnings or errors
-- [ ] I have updated documentation if needed
-- [ ] My commit messages are clear and descriptive
-
-## 📸 Screenshots (if applicable)
-
-<!-- Add screenshots to help explain your changes -->
 
 ## 💬 Additional Notes
 
