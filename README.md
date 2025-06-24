@@ -1,4 +1,4 @@
-# codac
+# **codac**
 
 **codac** is the comprehensive learning management system and community platform designed specifically for students and alumni of Code Academy Berlin. codac facilitates learning, collaboration, and community building among current students and graduates.
 
