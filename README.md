@@ -49,6 +49,7 @@ codac empowers Code Academy Berlin students and alumni to learn, collaborate, an
 - **[Drizzle ORM](https://orm.drizzle.team/)** for type-safe database management.
 - **[SQLite](https://www.sqlite.org/)** for lightweight, serverless database management.
 - **[Shadcn/UI](https://ui.shadcn.com/)** for beautiful, customizable components.
+- **[Biome](https://biomejs.dev/)** for **Formatting and Linting**
 - **[Jest](https://jestjs.io/)** A testing framework for ensuring your app works as expected.
 - **React Hook Form**: A library for managing form state and validation in React applications
 - **Zod**: A TypeScript-first schema declaration and validation library
