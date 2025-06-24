@@ -17,7 +17,7 @@ jobs:
         with:
           # You can target a project in a different organization
           # to the issue
-          project-url: https://github.com/orgs/CodeAcademyBerlin/projects/15
+          project-url: https://github.com/orgs/CodeAcademyBerlin/projects/19
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
-          labeled: bug, needs-triage, needs-review
+          labeled: bug, feature, needs-triage, needs-review
           label-operator: OR

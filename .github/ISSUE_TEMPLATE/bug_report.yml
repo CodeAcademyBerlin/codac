@@ -11,20 +11,14 @@ body:
         **Before you start:** Please search existing issues to see if someone already reported this bug.
 
   - type: textarea
-    id: what-happened
+    id: bug-description
     attributes:
-      label: What happened?
-      description: A clear description of what the bug is
-      placeholder: Tell us what you see!
-    validations:
-      required: true
-
-  - type: textarea
-    id: expected-behavior
-    attributes:
-      label: What did you expect to happen?
-      description: A clear description of what you expected to happen
-      placeholder: Tell us what you expected!
+      label: What happened and what did you expect instead?
+      description: Describe the bug and what you expected to happen
+      placeholder: |
+        **What happened:** Tell us what you see...
+        
+        **Expected behavior:** Tell us what you expected...
     validations:
       required: true
 
@@ -36,43 +30,20 @@ body:
       placeholder: |
         1. Go to '...'
         2. Click on '...'
-        3. Scroll down to '...'
-        4. See error
+        3. See error
     validations:
       required: true
 
   - type: textarea
-    id: screenshots
+    id: environment-context
     attributes:
-      label: Screenshots
-      description: If applicable, add screenshots to help explain your problem
-      placeholder: Drag and drop images here, or click to select files
-
-  - type: dropdown
-    id: browsers
-    attributes:
-      label: What browsers are you seeing the problem on?
-      multiple: true
-      options:
-        - Chrome
-        - Firefox
-        - Safari
-        - Microsoft Edge
-        - Other
-
-  - type: input
-    id: operating-system
-    attributes:
-      label: Operating System
-      description: What operating system are you using?
-      placeholder: e.g., Windows 11, macOS Monterey, Ubuntu 20.04
-
-  - type: textarea
-    id: additional-context
-    attributes:
-      label: Additional context
-      description: Add any other context about the problem here
-      placeholder: Anything else you think might be helpful?
+      label: Environment and additional context
+      description: Include your OS, browser, screenshots, and any other relevant details
+      placeholder: |
+        **OS:** e.g., Windows 11, macOS, Ubuntu
+        **Browser:** e.g., Chrome, Firefox, Safari
+        **Screenshots:** (drag and drop images here)
+        **Additional context:** Anything else that might be helpful
 
   - type: checkboxes
     id: terms

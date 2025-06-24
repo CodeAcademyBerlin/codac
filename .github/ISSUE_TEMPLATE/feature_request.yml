@@ -1,7 +1,7 @@
 name: ✨ Feature Request
 description: Suggest an idea for this project
 title: "[Feature]: "
-labels: ["enhancement", "needs-discussion"]
+labels: ["feature", "needs-triage"]
 body:
   - type: markdown
     attributes:
@@ -13,29 +13,20 @@ body:
   - type: textarea
     id: problem
     attributes:
-      label: Is your feature request related to a problem?
-      description: A clear description of what the problem is
-      placeholder: I'm always frustrated when...
+      label: What problem does this solve?
+      description: Describe the problem or need this feature would address
+      placeholder: I'm always frustrated when... / I need to be able to...
     validations:
       required: false
 
   - type: textarea
     id: solution
     attributes:
-      label: Describe the solution you'd like
+      label: Describe the feature you'd like
       description: A clear description of what you want to happen
       placeholder: I would like to be able to...
     validations:
       required: true
-
-  - type: textarea
-    id: alternatives
-    attributes:
-      label: Describe alternatives you've considered
-      description: A clear description of any alternative solutions you've thought of
-      placeholder: I considered...
-    validations:
-      required: false
 
   - type: dropdown
     id: priority
@@ -49,33 +40,3 @@ body:
     validations:
       required: true
 
-  - type: checkboxes
-    id: user-types
-    attributes:
-      label: Who would benefit from this feature?
-      description: Select all that apply
-      options:
-        - label: Students
-        - label: Alumni
-        - label: Mentors
-        - label: Instructors
-        - label: Administrators
-        - label: Everyone
-
-  - type: textarea
-    id: additional-context
-    attributes:
-      label: Additional context
-      description: Add any other context, screenshots, or examples about the feature request here
-      placeholder: Any mockups, examples from other apps, or additional details?
-
-  - type: checkboxes
-    id: terms
-    attributes:
-      label: Before submitting
-      description: Please confirm the following
-      options:
-        - label: I have searched existing issues to see if this feature was already requested
-          required: true
-        - label: I have described the feature clearly and completely
-          required: true
