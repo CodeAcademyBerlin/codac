@@ -2,7 +2,7 @@ import { genSaltSync, hashSync } from 'bcrypt-ts'
 import { eq } from 'drizzle-orm'
 
 // Import the database connection and schema from db/schema.ts
-import { db, users, cohorts } from '../db/schema'
+import { cohorts, db, users } from '../db/schema'
 
 export { db }
 

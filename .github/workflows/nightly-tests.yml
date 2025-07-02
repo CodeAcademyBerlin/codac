@@ -3,7 +3,7 @@ name: Nightly Tests
 on:
   schedule:
     # Run every night at 2 AM UTC
-    - cron: '0 2 * * *'
+    - cron: "0 2 * * *"
   workflow_dispatch: # Allow manual trigger
 
 jobs:
@@ -14,7 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         browser: [chromium, firefox, webkit]
-        
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -22,11 +22,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
+          version: 10.12.4
           run_install: false
 
       - name: Install dependencies
@@ -55,7 +56,7 @@ jobs:
   performance-tests:
     name: Performance Tests
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -63,7 +64,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -81,16 +82,16 @@ jobs:
           # Build and start application first
           pnpm build
           pnpm start &
-          
+
           # Wait for application to be ready
           timeout 60s bash -c 'until curl -f http://localhost:3000; do sleep 2; done'
-          
+
           # Run Lighthouse CI or similar performance tests
           npx lighthouse http://localhost:3000 --output=json --output-path=./lighthouse-report.json --chrome-flags="--headless --no-sandbox"
         env:
           NEXTAUTH_SECRET: performance-test-secret
           NEXTAUTH_URL: http://localhost:3000
-          
+
       - name: Upload performance results
         uses: actions/upload-artifact@v4
         if: always()
@@ -102,7 +103,7 @@ jobs:
   accessibility-tests:
     name: Accessibility Tests
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -110,7 +111,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -128,13 +129,13 @@ jobs:
           # Build and start application first
           pnpm build
           pnpm start &
-          
+
           # Wait for application to be ready
           timeout 60s bash -c 'until curl -f http://localhost:3000; do sleep 2; done'
-          
+
           # Install axe-core CLI
           npm install -g @axe-core/cli
-          
+
           # Run accessibility tests on key pages
           axe http://localhost:3000/login --exit
           axe http://localhost:3000/register --exit
@@ -155,7 +156,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [comprehensive-e2e, performance-tests, accessibility-tests]
     if: always()
-    
+
     steps:
       - name: Send notification
         run: |
@@ -169,8 +170,8 @@ jobs:
             echo "Performance: ${{ needs.performance-tests.result }}"
             echo "Accessibility: ${{ needs.accessibility-tests.result }}"
           fi
-          
+
           # You can add Slack/Discord/email notifications here
           # Example: curl -X POST -H 'Content-type: application/json' \
           #   --data '{"text":"Nightly test results: ..."}' \
-          #   ${{ secrets.SLACK_WEBHOOK_URL }} 
+          #   ${{ secrets.SLACK_WEBHOOK_URL }}

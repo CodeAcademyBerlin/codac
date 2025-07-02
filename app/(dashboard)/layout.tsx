@@ -1,4 +1,4 @@
-import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar'
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 import '@/app/globals.css'
 
 import { AppSidebar } from '@/components/app-sidebar'

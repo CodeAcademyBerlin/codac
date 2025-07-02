@@ -114,15 +114,6 @@ Never contributed to open source before? That's exactly why we're here! Check ou
 - **Certificate System** - Digital certificates and blockchain verification
 - **API Integration** - Third-party integrations (GitHub, LinkedIn, Slack)
 
-### 🌐 Platform Enhancements
-
-- **Multi-language Support** - Internationalization for German and English
-- **Advanced Search** - Full-text search across all content types
-- **Notification System** - Real-time notifications via email, push, and in-app
-- **Advanced Permissions** - Fine-grained access control and content permissions
-- **Export Tools** - Data export for portfolios and academic records
-- **Advanced Analytics** - Comprehensive reporting and data visualization
-
 ## 🛠 Tech Stack
 
 - **[Next.js 15](https://nextjs.org/)** for performance and scalability.
@@ -172,10 +163,11 @@ Make sure you have the following installed on your system:
    ```
 
    Then edit `.env.local` with your configuration:
+
    ```
    # Database
    POSTGRES_URL="postgresql://username:password@localhost:5432/codac"
-   
+
    # NextAuth
    NEXTAUTH_SECRET="your-nextauth-secret"
    NEXTAUTH_URL="http://localhost:3000"
@@ -200,139 +192,6 @@ Make sure you have the following installed on your system:
 
 We welcome contributions from developers of all skill levels! Whether you're a complete beginner or experienced developer, there are many ways to help improve codac while learning valuable skills.
 
-### For Beginners 👋
-
-**First time contributing to open source?** You're in the right place! codac is specifically designed to help you learn:
-
-- **📝 Start with documentation** - Fix typos, improve explanations, or add examples
-- **🐛 Report bugs** - Found something that doesn't work? Create an issue!
-- **💡 Suggest features** - Have ideas for improvements? We'd love to hear them!
-- **🔍 Review code** - Read through pull requests and ask questions
-- **❓ Ask questions** - Use GitHub Discussions or issues - no question is too basic!
-
-### Learning Path for New Contributors
-
-1. **Week 1-2**: Read the codebase, set it up locally, report any issues you encounter
-2. **Week 3-4**: Fix documentation, typos, or small UI improvements
-3. **Week 5-8**: Take on "good first issue" labeled tasks
-4. **Month 2+**: Contribute features, review others' code, help newer contributors
-
-## 🔄 How to Fork & Contribute
-
-This section provides a complete, step-by-step guide for contributing to codac. Perfect for beginners learning open source development!
-
-### Step 1: Fork the Repository
-
-**Forking creates your own copy of the project where you can make changes safely.**
-
-1. **Go to the codac repository**: Navigate to `https://github.com/CodeAcademyBerlin/codac`
-2. **Click the "Fork" button**: Located in the top-right corner of the page
-3. **Choose your account**: Select where you want to fork the repository (usually your personal GitHub account)
-4. **Wait for the fork**: GitHub will create a copy of the repository in your account
-
-**What just happened?** You now have your own copy of codac at `https://github.com/YOUR-USERNAME/codac`
-
-### Step 2: Clone Your Fork
-
-**Cloning downloads your fork to your computer so you can work on it.**
-
-```bash
-# Replace YOUR-USERNAME with your actual GitHub username
-git clone https://github.com/YOUR-USERNAME/codac.git
-cd codac
-```
-
-### Step 3: Add the Original Repository as "Upstream"
-
-**This lets you get updates from the main project.**
-
-```bash
-git remote add upstream https://github.com/CodeAcademyBerlin/codac.git
-git remote -v  # Verify you have both 'origin' (your fork) and 'upstream' (original)
-```
-
-### Step 4: Create a Branch for Your Changes
-
-**Never work directly on the main branch! Always create a feature branch.**
-
-```bash
-# Get the latest changes from the main project
-git fetch upstream
-git checkout main
-git merge upstream/main
-
-# Create and switch to a new branch
-git checkout -b feature/your-feature-name
-```
-
-**Branch naming conventions:**
-- `feature/add-user-profile` - for new features
-- `fix/login-bug` - for bug fixes
-- `docs/update-readme` - for documentation
-- `refactor/cleanup-components` - for code improvements
-
-### Step 5: Make Your Changes
-
-1. **Set up the development environment** (follow the [Quick Start](#-quick-start) guide)
-2. **Make your changes** - edit files, add features, fix bugs
-3. **Test your changes** - make sure everything still works
-4. **Follow the code style** - we use Biome for formatting
-
-```bash
-# Format your code
-pnpm format
-
-# Lint your code
-pnpm lint
-
-# Run tests
-pnpm test
-```
-
-### Step 6: Commit Your Changes
-
-**Write clear commit messages that explain what you did.**
-
-```bash
-# Add your changes to staging
-git add .
-
-# Commit with a descriptive message
-git commit -m "Add user profile editing functionality
-
-- Add ProfileForm component with validation
-- Update user API endpoint to handle PATCH requests
-- Add tests for profile update functionality
-- Update documentation for new feature"
-```
-
-**Good commit message format:**
-- **First line**: Brief summary (50 characters or less)
-- **Blank line**
-- **Description**: Explain what and why, not how (if needed)
-
-### Step 7: Push Your Branch
-
-**Upload your changes to your fork on GitHub.**
-
-```bash
-git push origin feature/your-feature-name
-```
-
-### Step 8: Create a Pull Request
-
-**A pull request asks the maintainers to review and merge your changes.**
-
-1. **Go to your fork on GitHub**: `https://github.com/YOUR-USERNAME/codac`
-2. **Click "Compare & pull request"**: GitHub usually shows this button automatically
-3. **Fill out the PR template**:
-   - **Title**: Clear, descriptive summary of your changes
-   - **Description**: Explain what you did, why, and how to test it
-   - **Link any related issues**: Use "Closes #123" if your PR fixes an issue
-4. **Click "Create pull request"**
-
-### Step 9: Respond to Feedback
-
 **Code review is a collaborative process - don't take feedback personally!**
 
 - **Address comments promptly**: Make requested changes or ask for clarification
@@ -349,97 +208,6 @@ git commit -m "Address code review feedback
 - Update tests to cover new scenarios"
 git push origin feature/your-feature-name
 ```
-
-### Step 10: Keep Your Fork Updated
-
-**Regularly sync with the main project to avoid conflicts.**
-
-```bash
-# Switch to main branch
-git checkout main
-
-# Pull latest changes from upstream
-git fetch upstream
-git merge upstream/main
-
-# Push updates to your fork
-git push origin main
-```
-
-### 🎉 Congratulations!
-
-You've just learned the complete open source contribution workflow! This process is used by millions of developers worldwide for collaborating on software projects.
-
-### Common Git Commands Cheat Sheet
-
-```bash
-# Check status of your changes
-git status
-
-# See what files have changed
-git diff
-
-# View commit history
-git log --oneline
-
-# Switch between branches
-git checkout branch-name
-
-# Create and switch to new branch
-git checkout -b new-branch-name
-
-# Undo unstaged changes
-git checkout -- filename
-
-# Undo last commit (keep changes)
-git reset --soft HEAD~1
-```
-
-### Getting Help
-
-- **GitHub Discussions**: Ask questions about contributing
-- **Issues**: Report bugs or request features
-- **Discord/Slack**: Real-time chat with the community
-- **Developer Documentation**: Check our [Developer Documentation](/docs/dev/README.md)
-- **Github Actions Workflow Documentation**: Check our [Github Actions Workflow Documentation](/.github/actions.md)
-
-Remember: **Everyone was a beginner once!** The codac community is here to help you learn and grow as a developer.
-
-### Good First Issues
-
-Look for issues labeled `good first issue` - these are perfect for newcomers! They're typically:
-
-- **Well-documented** with clear requirements and context
-- **Small in scope** and easier to tackle (usually 1-3 hours of work)
-- **Great learning opportunities** that teach important concepts
-- **Mentored** by experienced contributors who will guide you
-
-### Types of Contributions We Need
-
-- **🐛 Bug fixes**: Solve problems and improve user experience
-- **✨ New features**: Add functionality that users have requested
-- **📚 Documentation**: Help others understand the codebase
-- **🎨 UI/UX improvements**: Make the interface more beautiful and usable
-- **🧪 Tests**: Improve code reliability and prevent regressions
-- **♻️ Refactoring**: Clean up code while maintaining functionality
-- **🌐 Accessibility**: Make the app usable for everyone
-- **📱 Responsive design**: Ensure the app works on all devices
-
-## 🌟 Community
-
-Join our growing community of learners and contributors:
-
-- **GitHub Discussions** - Ask questions and share ideas
-- **Issues** - Report bugs or request features
-- **Pull Requests** - Contribute code improvements
-
-### Recognition
-
-All contributors are recognized in our project! No matter how small your contribution, it matters and helps make codac better for everyone.
-
-## 📜 Code of Conduct
-
-We are committed to providing a welcoming and inclusive environment for all contributors. Please read our [Code of Conduct](./docs/dev/CODE_OF_CONDUCT.md) to understand our community standards.
 
 ## 📄 License
 
