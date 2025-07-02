@@ -1,9 +1,9 @@
-'use client';
+'use client'
 
-import { useFormStatus } from 'react-dom';
+import { useFormStatus } from 'react-dom'
 
 export function SubmitButton({ children }: { children: React.ReactNode }) {
-  const { pending } = useFormStatus();
+  const { pending } = useFormStatus()
 
   return (
     <button
@@ -18,7 +18,9 @@ export function SubmitButton({ children }: { children: React.ReactNode }) {
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
+          aria-label="Loading"
         >
+          <title>Loading spinner</title>
           <circle
             className="opacity-25"
             cx="12"
@@ -34,9 +36,9 @@ export function SubmitButton({ children }: { children: React.ReactNode }) {
           />
         </svg>
       )}
-      <span aria-live="polite" className="sr-only" role="status">
+      <output aria-live="polite" className="sr-only">
         {pending ? 'Loading' : 'Submit form'}
-      </span>
+      </output>
     </button>
-  );
+  )
 }

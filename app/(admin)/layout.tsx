@@ -1,11 +1,11 @@
-import { SidebarProvider } from '@/components/ui/sidebar';
-import '@/app/globals.css';
+import { SidebarProvider } from '@/components/ui/sidebar'
+import '@/app/globals.css'
 
-import { AppSidebar } from '@/components/app-sidebar';
-import Header from '@/components/header';
+import { AppSidebar } from '@/components/app-sidebar'
+import Header from '@/components/header'
 
-const title = 'Admin Page';
-const description = '';
+const title = 'Admin Page'
+const description = ''
 
 export const metadata = {
   title,
@@ -16,7 +16,7 @@ export const metadata = {
     description,
   },
   metadataBase: new URL('https://nextjs-postgres-auth.vercel.app'),
-};
+}
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -27,5 +27,5 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         {children}
       </main>
     </SidebarProvider>
-  );
+  )
 }

@@ -1,21 +1,18 @@
-import { drizzle } from "drizzle-orm/vercel-postgres";
-import { sql } from "@vercel/postgres";
-import { eq } from 'drizzle-orm';
+import { genSaltSync, hashSync } from 'bcrypt-ts'
+import { eq } from 'drizzle-orm'
 
-import { users } from "../db/schema";
-import * as schema from "../db/schema";
-import { genSaltSync, hashSync } from "bcrypt-ts";
+// Import the database connection and schema from db/schema.ts
+import { db, users } from '../db/schema'
 
-
-export const db = drizzle(sql, { schema });
+export { db }
 
 export async function getUser(email: string) {
-	return await db.select().from(users).where(eq(users.email, email));
+  return await db.select().from(users).where(eq(users.email, email))
 }
 
 export async function createUser(email: string, password: string) {
-  const salt = genSaltSync(10);
-  const hash = hashSync(password, salt);
+  const salt = genSaltSync(10)
+  const hash = hashSync(password, salt)
 
-  return await db.insert(users).values({ email: email, password: hash });
+  return await db.insert(users).values({ email: email, password: hash })
 }

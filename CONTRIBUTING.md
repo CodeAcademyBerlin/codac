@@ -1,151 +1,123 @@
 # Contributing to codac
 
-Thank you for your interest in contributing to **codac**! 🎉 We welcome contributions from developers of all skill levels, especially beginners.
+Thank you for your interest in contributing to codac! This project is designed to help beginners learn open source development, so we welcome contributors of all skill levels.
 
-## 🚀 Getting Started
+## 🚀 Quick Start
 
-### Prerequisites
+**New to open source?** Check out our [detailed forking and contribution guide](README.md#-how-to-fork--contribute) in the README for step-by-step instructions.
 
-Before you begin, make sure you have:
+## 📋 Before You Contribute
 
-- **Node.js** (v20 or higher) - [Download here](https://nodejs.org/)
-- **pnpm** (recommended) - Install with `npm install -g pnpm`
-- **Git** - [Download here](https://git-scm.com/)
-- A **GitHub account**
+1. **Read our [Code of Conduct](CODE_OF_CONDUCT.md)** - Help us maintain a welcoming community
+2. **Check existing issues** - Someone might already be working on your idea
+3. **Start small** - Look for `good first issue` labels if you're new
 
-### Setting Up Your Development Environment
+## 🛠 Development Setup
 
-1. **Fork the repository**
+```bash
+# Fork and clone the repository
+git clone https://github.com/YOUR-USERNAME/codac.git
+cd codac
 
-   - Click the "Fork" button at the top right of the GitHub page
-   - This creates your own copy of the project
+# Install dependencies
+pnpm install
 
-2. **Clone your fork**
+# Set up environment variables
+cp .env.example .env.local
+# Edit .env.local with your database configuration
 
-   ```bash
-   git clone https://github.com/YOUR-USERNAME/codac.git
-   cd codac
-   ```
+# Set up database
+pnpm db:push
 
-3. **Install dependencies**
+# Start development server
+pnpm dev
+```
 
-   ```bash
-   pnpm install
-   ```
+## 🎯 How to Contribute
 
-4. **Start the development server**
+### Reporting Bugs
+- Use the issue template
+- Include steps to reproduce
+- Add screenshots if applicable
 
-   ```bash
-   pnpm dev
-   ```
+### Suggesting Features
+- Check if it aligns with our mission
+- Provide clear use cases
+- Start with a discussion issue
 
-5. **Open your browser**
-   - Navigate to `http://localhost:3000`
-   - You should see the codac application running!
+### Submitting Code
+- Follow our [Git workflow](README.md#step-4-create-a-branch-for-your-changes)
+- Write clear commit messages
+- Add tests for new features
+- Update documentation if needed
 
-## 🤝 How to Contribute
+## ✅ Code Standards
 
-### For Beginners
+```bash
+# Format your code
+pnpm format
 
-If you're new to open source, here are some great ways to start:
+# Lint your code  
+pnpm lint
 
-1. **Documentation improvements** - Fix typos, improve explanations, add examples
-2. **Bug reports** - Found something that doesn't work? Let us know!
-3. **Feature requests** - Have an idea? Open an issue to discuss it
-4. **Good first issues** - Look for issues labeled `good first issue`
+# Run tests
+pnpm test
+```
 
-### Making Changes
+**Key Guidelines:**
+- Use TypeScript for all new code
+- Follow existing code patterns
+- Write descriptive variable and function names
+- Add comments for complex logic
+- Keep components small and focused
 
-1. **Create a new branch**
+## 🔄 Pull Request Process
 
-   ```bash
-   git checkout -b feature/your-feature-name
-   # or
-   git checkout -b fix/your-bug-fix
-   ```
+1. **Create a feature branch** from `main`
+2. **Make your changes** and test thoroughly
+3. **Update documentation** if needed
+4. **Submit a pull request** with a clear description
+5. **Respond to feedback** promptly and constructively
 
-2. **Make your changes**
+## 🎓 Learning Resources
 
-   - Write clear, readable code
-   - Follow the existing code style
-   - Add comments where necessary
+**First time contributing?** These resources will help:
+- [GitHub's Open Source Guide](https://opensource.guide/)
+- [First Contributions](https://firstcontributions.github.io/)
+- [How to Contribute to Open Source](https://opensource.guide/how-to-contribute/)
 
-3. **Test your changes**
+## 🤝 Getting Help
 
-   ```bash
-   pnpm lint    # Check code style
-   pnpm build   # Ensure it builds
-   ```
+- **GitHub Discussions** - Ask questions and share ideas
+- **Issues** - Report problems or request features  
+- **Pull Request Comments** - Get help with your contributions
 
-4. **Commit your changes**
+## 🏷 Issue Labels
 
-   ```bash
-   git add .
-   git commit -m "Add: brief description of your changes"
-   ```
+- `good first issue` - Perfect for beginners
+- `help wanted` - We'd love community help
+- `bug` - Something isn't working
+- `enhancement` - New feature or improvement
+- `documentation` - Documentation improvements
 
-5. **Push to your fork**
+## 📝 Commit Message Format
 
-   ```bash
-   git push origin feature/your-feature-name
-   ```
+```
+type: brief description
 
-6. **Create a Pull Request**
-   - Go to your fork on GitHub
-   - Click "New Pull Request"
-   - Fill out the PR template
+Optional longer description explaining what and why
+```
 
-## 📝 Commit Message Guidelines
+**Types:** `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
 
-Use clear, descriptive commit messages:
+**Example:**
+```
+feat: add user profile editing
 
-- `Add: new feature description`
-- `Fix: bug description`
-- `Update: what you updated`
-- `Remove: what you removed`
-
-Examples:
-
-- `Add: user profile component`
-- `Fix: login form validation`
-- `Update: README installation instructions`
-
-## 🐛 Reporting Bugs
-
-Found a bug? Help us fix it!
-
-1. **Check existing issues** - Someone might have already reported it
-2. **Create a new issue** using the bug report template
-3. **Include details**:
-   - What you expected to happen
-   - What actually happened
-   - Steps to reproduce the bug
-   - Your operating system and browser
-
-## 💡 Suggesting Features
-
-Have an idea for codac?
-
-1. **Check existing issues** - Maybe someone already suggested it
-2. **Create a new issue** using the feature request template
-3. **Describe your idea** clearly and explain why it would be useful
-
-## ❓ Need Help?
-
-Don't hesitate to ask for help! You can:
-
-- **Open an issue** with the `question` label
-- **Join our discussions** in the GitHub Discussions tab
-- **Comment on existing issues** if you need clarification
-
-## 🎉 Recognition
-
-All contributors will be recognized in our README! Your contributions, no matter how small, are valuable and appreciated.
-
-## 📜 Code of Conduct
-
-Please be respectful and inclusive. We want everyone to feel welcome in our community. See our [Code of Conduct](CODE_OF_CONDUCT.md) for details.
+Add ProfileForm component with validation and API integration.
+Users can now update their personal information and profile picture.
+```
 
 ---
 
-**Happy coding!** 🚀
+**Remember:** Everyone was a beginner once! Don't hesitate to ask questions, and thank you for helping make codac better for everyone. 🚀 

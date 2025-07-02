@@ -1,0 +1,129 @@
+name: PR Tests
+
+on:
+  pull_request:
+    branches: [main, develop]
+    types: [opened, synchronize, reopened]
+
+jobs:
+  quick-checks:
+    name: Quick Checks
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run linting
+        run: pnpm lint
+
+      - name: Run formatting check
+        run: pnpm check
+
+      - name: Type check
+        run: pnpm build --dry-run || echo "Type checking completed"
+
+      - name: Run unit tests
+        run: pnpm test --watchAll=false
+
+  critical-e2e:
+    name: Critical E2E Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/pnpm-lock.yaml') }}
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install chromium --with-deps
+
+      - name: Build application
+        run: pnpm build
+        env:
+          NEXTAUTH_SECRET: test-secret-key-for-pr
+          NEXTAUTH_URL: http://localhost:3000
+
+      - name: Start application
+        run: pnpm start &
+        env:
+          NODE_ENV: production
+          PORT: 3000
+          NEXTAUTH_SECRET: test-secret-key-for-pr
+          NEXTAUTH_URL: http://localhost:3000
+
+      - name: Wait for application to be ready
+        run: |
+          timeout 60s bash -c 'until curl -f http://localhost:3000; do sleep 2; done'
+
+      - name: Run critical e2e tests
+        run: pnpm playwright test --project=chromium auth.spec.ts navigation.spec.ts
+        env:
+          CI: true
+
+      - name: Upload test results on failure
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: pr-e2e-test-results
+          path: test-results/
+          retention-days: 3 

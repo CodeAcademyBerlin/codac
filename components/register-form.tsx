@@ -1,30 +1,39 @@
-'use client';
+'use client'
 
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
+import { Button } from '@/components/ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 // import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
+import { Input } from '@/components/ui/input'
+import Link from 'next/link'
 
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { FormField, FormItem, FormLabel, FormControl, FormMessage, Form } from './ui/form';
-import { register } from '@/actions/auth';
-import { useRouter } from 'next/navigation';
+import { register } from '@/actions/auth'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
 
-const formSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Invalid email address'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
-  confirmPassword: z.string().min(6, 'Password must be at least 6 characters'),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords must match",
-  path: ['confirmPassword'],
-});
+const formSchema = z
+  .object({
+    name: z.string().min(2, 'Name must be at least 2 characters'),
+    email: z.string().email('Invalid email address'),
+    password: z.string().min(6, 'Password must be at least 6 characters'),
+    confirmPassword: z.string().min(6, 'Password must be at least 6 characters'),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: 'Passwords must match',
+    path: ['confirmPassword'],
+  })
 
 export default function RegisterForm() {
-  const router = useRouter();
+  const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -33,14 +42,14 @@ export default function RegisterForm() {
       password: '',
       confirmPassword: '',
     },
-  });
+  })
 
-   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const res = await register(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const res = await register(values)
     if (res.message !== 'success') {
-      form.setError('email', { type: 'manual', message: res.message });
+      form.setError('email', { type: 'manual', message: res.message })
     } else {
-      router.push('/login');
+      router.push('/login')
     }
   }
 
@@ -120,5 +129,5 @@ export default function RegisterForm() {
         </p>
       </CardFooter>
     </Card>
-  );
+  )
 }

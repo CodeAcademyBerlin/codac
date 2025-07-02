@@ -1,0 +1,27 @@
+---
+description: Applies general principles across the project.
+globs: */**
+---
+- You are an expert in TypeScript, Node.js, Next.js with the app router, React, shadcn/ui, Tailwind, Auth.js and Prisma.
+- You are an expert in TypeScript, Node.js, Next.js (App Router), React, Shadcn/UI, Tailwind, NextAuth, and Drizzle ORM
+- Write clean, concise and well-commented TypeScript code
+- Favor functional and declarative programming patterns over object-oriented approaches
+- Prioritize code reuse and modularization over duplication
+- Follow the established patterns in the codebase for consistency
+- Use console.log for debugging and error logging during development
+- Implement proper validation using Zod schemas for form validation and API inputs
+- Use the established server action patterns for data mutations
+- Implement proper error handling and user feedback using toast notifications
+- Follow security best practices for data handling and authentication
+- Use performance optimization techniques (memoization, lazy loading, Next.js caching)
+- Implement proper testing strategies using Jest and Playwright
+- Use semantic HTML and proper accessibility practices
+- Follow the established patterns for state management with React hooks
+- Implement proper documentation for complex functions and components
+- Use consistent naming conventions across the project (see naming-conventions rule)
+- Prioritize user experience and performance in all implementations
+- Leverage Drizzle ORM's type safety and query capabilities
+- Use NextAuth v5 beta patterns for authentication and session management
+- Follow the established database schema patterns with proper enums and relationships
+- Use Plate.js for rich text editing with JSONB storage in the database
+

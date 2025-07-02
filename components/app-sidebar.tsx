@@ -1,150 +1,178 @@
-"use client"
+'use client'
 
-import * as React from "react"
-import {
-  AudioWaveform,
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
-  GalleryVerticalEnd,
-  Map,
-  PieChart,
-  Settings2,
-  SquareTerminal,
-} from "lucide-react"
+import { BookOpen, GraduationCap, Home, Settings, TrendingUp, UserCheck, Users } from 'lucide-react'
+import type * as React from 'react'
 
-import { NavMain } from "./nav-main"
-import { TeamSwitcher } from "./team-switcher"
-import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from "./ui/sidebar"
+import { NavMain } from './nav-main'
+import { TeamSwitcher } from './team-switcher'
+import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from './ui/sidebar'
 
-
-// This is sample data.
+// Codac-specific navigation data
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    name: 'Student',
+    email: 'student@codeacademy.berlin',
+    avatar: '/images/user.png',
   },
   teams: [
     {
-      name: "Acme Inc",
-      logo: GalleryVerticalEnd,
-      plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
+      name: 'Code Academy Berlin',
+      logo: GraduationCap,
+      plan: 'Premium',
     },
   ],
   navMain: [
     {
-      title: "Playground",
-      url: "#",
-      icon: SquareTerminal,
+      title: 'Dashboard',
+      url: '/dashboard',
+      icon: Home,
       isActive: true,
       items: [
         {
-          title: "History",
-          url: "#",
+          title: 'Overview',
+          url: '/dashboard',
         },
         {
-          title: "Starred",
-          url: "#",
+          title: 'Progress',
+          url: '/dashboard/progress',
         },
         {
-          title: "Settings",
-          url: "#",
+          title: 'Achievements',
+          url: '/dashboard/achievements',
         },
       ],
     },
     {
-      title: "Models",
-      url: "#",
-      icon: Bot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Documentation",
-      url: "#",
+      title: 'Learning',
+      url: '/learning',
       icon: BookOpen,
       items: [
         {
-          title: "Introduction",
-          url: "#",
+          title: 'Courses',
+          url: '/learning/courses',
         },
         {
-          title: "Get Started",
-          url: "#",
+          title: 'Assignments',
+          url: '/learning/assignments',
         },
         {
-          title: "Tutorials",
-          url: "#",
+          title: 'Resources',
+          url: '/learning/resources',
         },
         {
-          title: "Changelog",
-          url: "#",
+          title: 'Schedule',
+          url: '/learning/schedule',
         },
       ],
     },
     {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
+      title: 'Community',
+      url: '/community',
+      icon: Users,
       items: [
         {
-          title: "General",
-          url: "#",
+          title: 'Posts',
+          url: '/community/posts',
         },
         {
-          title: "Team",
-          url: "#",
+          title: 'Discussions',
+          url: '/community/discussions',
         },
         {
-          title: "Billing",
-          url: "#",
+          title: 'Student Directory',
+          url: '/community/directory',
         },
         {
-          title: "Limits",
-          url: "#",
+          title: 'Alumni Network',
+          url: '/community/alumni',
+        },
+      ],
+    },
+    {
+      title: 'Mentorship',
+      url: '/mentorship',
+      icon: UserCheck,
+      items: [
+        {
+          title: 'Find a Mentor',
+          url: '/mentorship/find',
+        },
+        {
+          title: 'My Mentors',
+          url: '/mentorship/mentors',
+        },
+        {
+          title: 'Mentoring',
+          url: '/mentorship/mentoring',
+        },
+        {
+          title: 'Sessions',
+          url: '/mentorship/sessions',
+        },
+      ],
+    },
+    {
+      title: 'Career',
+      url: '/career',
+      icon: TrendingUp,
+      items: [
+        {
+          title: 'Job Board',
+          url: '/career/jobs',
+        },
+        {
+          title: 'Portfolio',
+          url: '/career/portfolio',
+        },
+        {
+          title: 'Interview Prep',
+          url: '/career/interview-prep',
+        },
+        {
+          title: 'Resources',
+          url: '/career/resources',
+        },
+      ],
+    },
+    {
+      title: 'Settings',
+      url: '/settings',
+      icon: Settings,
+      items: [
+        {
+          title: 'Profile',
+          url: '/settings/profile',
+        },
+        {
+          title: 'Notifications',
+          url: '/settings/notifications',
+        },
+        {
+          title: 'Privacy',
+          url: '/settings/privacy',
+        },
+        {
+          title: 'Account',
+          url: '/settings/account',
         },
       ],
     },
   ],
   projects: [
     {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
+      name: 'Full Stack Development',
+      url: '/projects/full-stack',
+      icon: BookOpen,
     },
     {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
+      name: 'Data Science',
+      url: '/projects/data-science',
+      icon: TrendingUp,
     },
     {
-      name: "Travel",
-      url: "#",
-      icon: Map,
+      name: 'Web Development',
+      url: '/projects/web-dev',
+      icon: GraduationCap,
     },
   ],
 }
@@ -159,9 +187,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain items={data.navMain} />
         {/* <NavProjects projects={data.projects} /> */}
       </SidebarContent>
-      <SidebarFooter>
-        {/* <NavUser user={data.user} /> */}
-      </SidebarFooter>
+      <SidebarFooter>{/* <NavUser user={data.user} /> */}</SidebarFooter>
       <SidebarRail />
     </Sidebar>
   )

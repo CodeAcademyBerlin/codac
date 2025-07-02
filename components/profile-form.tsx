@@ -1,27 +1,34 @@
-'use client';
+'use client'
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
-import { User } from 'next-auth';
-import { useState } from 'react';
-import { useToast } from '@/hooks/use-toast';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { updateUserProfile } from '@/actions/user';
+import { updateUserProfile } from '@/actions/user'
+import { Button } from '@/components/ui/button'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { useToast } from '@/hooks/use-toast'
+import { zodResolver } from '@hookform/resolvers/zod'
+import type { User } from 'next-auth'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
 
 const profileFormSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
   image: z.string().optional(),
-});
+})
 
-type ProfileFormValues = z.infer<typeof profileFormSchema>;
+type ProfileFormValues = z.infer<typeof profileFormSchema>
 
 export default function ProfileForm({ user }: { user: User }) {
-  const { toast } = useToast();
-  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast()
+  const [isLoading, setIsLoading] = useState(false)
 
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
@@ -29,27 +36,27 @@ export default function ProfileForm({ user }: { user: User }) {
       name: user.name || '',
       email: user.email || '',
     },
-  });
+  })
 
   async function onSubmit(data: ProfileFormValues) {
-    setIsLoading(true);
+    setIsLoading(true)
     try {
-      if (!user.id) throw new Error('User ID is required');
-      await updateUserProfile(user.id, data);
+      if (!user.id) throw new Error('User ID is required')
+      await updateUserProfile(user.id, data)
 
       toast({
         title: 'Success',
         description: 'Profile updated successfully',
-      });
+      })
     } catch (error) {
-      console.log(error);
+      console.log(error)
       toast({
         title: 'Error',
         description: 'Failed to update profile',
         variant: 'destructive',
-      });
+      })
     }
-    setIsLoading(false);
+    setIsLoading(false)
   }
 
   return (
@@ -88,5 +95,5 @@ export default function ProfileForm({ user }: { user: User }) {
         </Button>
       </form>
     </Form>
-  );
+  )
 }

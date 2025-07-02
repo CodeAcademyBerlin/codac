@@ -1,15 +1,20 @@
-'use server';
+'use server'
 
-import { getUser, createUser } from '@/app/db';
-import { redirect } from 'next/navigation';
+import { createUser, getUser } from '@/app/db'
+import { redirect } from 'next/navigation'
 
-export async function register(data: any) {
-  let user = await getUser(data.email);
+interface RegisterData {
+  email: string
+  password: string
+}
+
+export async function register(data: RegisterData) {
+  const user = await getUser(data.email)
 
   if (user.length > 0) {
-		return  { message: 'A user with this identifier already exists' }
-  } else {
-    await createUser(data.email, data.password);
-    redirect('/login');
+    return { message: 'A user with this identifier already exists' }
   }
+
+  await createUser(data.email, data.password)
+  redirect('/login')
 }

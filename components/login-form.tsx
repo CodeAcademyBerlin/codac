@@ -1,21 +1,33 @@
-'use client';
+'use client'
 
-import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { signIn } from 'next-auth/react';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { signIn } from 'next-auth/react'
+import Link from 'next/link'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 
-import { toast } from '@/hooks/use-toast';
-import { Button } from '@/components/ui/button';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { toast } from '@/hooks/use-toast'
 
 const FormSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
-});
+})
+
+interface AuthError {
+  code: string
+  message?: string
+}
 
 export default function LoginForm() {
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -24,23 +36,23 @@ export default function LoginForm() {
       email: '',
       password: '',
     },
-  });
+  })
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     const res = await signIn('credentials', {
       redirect: false,
       email: data.email,
       password: data.password,
-    });
+    })
     if (res?.error) {
       toast({
         variant: 'destructive',
         title: 'Uh oh! Something went wrong.',
-        description: (res as any).code,
-      });
-      form.setError('password', { type: 'manual', message: (res as any).code });
+        description: (res as AuthError).code,
+      })
+      form.setError('password', { type: 'manual', message: (res as AuthError).code })
     } else {
-      window.location.href = '/';
+      window.location.href = '/'
     }
   }
 
@@ -97,7 +109,7 @@ export default function LoginForm() {
                 onClick={async () => {
                   await signIn('google', {
                     redirectTo: '/',
-                  });
+                  })
                 }}
               >
                 Login with Google
@@ -114,5 +126,5 @@ export default function LoginForm() {
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }
