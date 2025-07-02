@@ -18,12 +18,7 @@ const pool = postgres(connectionString, { max: 1 })
 export const db = drizzle(pool)
 
 // Enums
-export const userRoleEnum = pgEnum('user_role', [
-  'student',
-  'alumni',
-  'mentor',
-  'admin',
-])
+export const userRoleEnum = pgEnum('user_role', ['student', 'alumni', 'mentor', 'admin'])
 export const postStatusEnum = pgEnum('post_status', ['draft', 'published', 'archived'])
 export const courseStatusEnum = pgEnum('course_status', ['draft', 'published', 'archived'])
 export const assignmentStatusEnum = pgEnum('assignment_status', [

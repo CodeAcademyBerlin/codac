@@ -1,7 +1,7 @@
 {
-    "recommendations": [
-        "yoavbls.pretty-ts-errors",
-        "bradlc.vscode-tailwindcss",
-        "github.vscode-github-actions"
-    ]
+  "recommendations": [
+    "yoavbls.pretty-ts-errors",
+    "bradlc.vscode-tailwindcss",
+    "github.vscode-github-actions"
+  ]
 }

@@ -26,7 +26,7 @@ export const authConfig = {
     },
     async signIn({ account, profile }) {
       // Optional: Restrict Google sign-ins to verified emails from specific domains
-      if (account?.provider === "google") {
+      if (account?.provider === 'google') {
         // Uncomment and modify the domain restriction as needed
         // return profile?.email_verified && profile?.email?.endsWith("@yourcompany.com")
         return profile?.email_verified ?? true
