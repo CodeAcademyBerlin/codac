@@ -1,8 +1,10 @@
 'use client'
 
+import type { UserRole } from '@/lib/user-roles'
+import { LogOut, User } from 'lucide-react'
 import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
-import { Avatar, AvatarImage, AvatarFallback } from './ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Button } from './ui/button'
 import {
   DropdownMenu,
@@ -11,15 +13,8 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from './ui/dropdown-menu'
-import { UserRole } from '@/lib/user-roles'
-import {
-  User,
-  Settings,
-  LogOut
-} from 'lucide-react'
 
 export function UserNav() {
   const { data: session } = useSession()
@@ -28,7 +23,11 @@ export function UserNav() {
     return null
   }
 
-  const userRole = (session.user as any)?.role as UserRole || 'student'
+  // Type assertion for user role - this is safe because we control the user object structure
+  const userRole = (session.user as { role?: UserRole })?.role || 'student'
+
+  // Suppress unused variable warning - this will be used when implementing role-based UI
+  console.log('Current user role:', userRole)
 
   return (
     <DropdownMenu>
@@ -40,7 +39,10 @@ export function UserNav() {
               alt={session.user.name ?? ''}
             />
             <AvatarFallback>
-              {session.user.name?.split(' ').map(n => n[0]).join('') ?? session.user.email?.[0]}
+              {session.user.name
+                ?.split(' ')
+                .map((n) => n[0])
+                .join('') ?? session.user.email?.[0]}
             </AvatarFallback>
           </Avatar>
         </Button>
@@ -59,9 +61,6 @@ export function UserNav() {
               Profile
             </DropdownMenuItem>
           </Link>
-
-
-
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem

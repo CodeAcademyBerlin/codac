@@ -51,17 +51,11 @@ test.describe('Authentication Pages', () => {
     test('should navigate between auth pages', async ({ page }) => {
       await page.goto('/login')
 
-      await Promise.all([
-        page.waitForURL('/register'),
-        page.click('text=Sign up')
-      ])
+      await Promise.all([page.waitForURL('/register'), page.click('text=Sign up')])
 
       await expect(page).toHaveURL('/register')
 
-      await Promise.all([
-        page.waitForURL('/login'),
-        page.click('text=Sign in')
-      ])
+      await Promise.all([page.waitForURL('/login'), page.click('text=Sign in')])
 
       await expect(page).toHaveURL('/login')
     })

@@ -4,9 +4,7 @@
   "description": "Comprehensive learning management system and community platform for Code Academy Berlin",
   "private": true,
   "pnpm": {
-    "onlyBuiltDependencies": [
-      "@tailwindcss/oxide"
-    ]
+    "onlyBuiltDependencies": ["@tailwindcss/oxide"]
   },
   "scripts": {
     "dev": "next dev --turbo",

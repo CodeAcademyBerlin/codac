@@ -1,11 +1,6 @@
-"use client"
+'use client'
 
-import * as React from "react"
-import {
-
-  type LucideIcon,
-} from "lucide-react"
-
+import type * as React from 'react'
 
 import {
   Sidebar,
@@ -13,31 +8,14 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
-} from "@/components/ui/sidebar"
-
-interface NavItem {
-  title: string
-  url: string
-  icon: LucideIcon
-  isActive?: boolean
-  items?: {
-    title: string
-    url: string
-  }[]
-}
-
-
+} from '@/components/ui/sidebar'
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-
   return (
-    <Sidebar>
-      <SidebarHeader>
-      </SidebarHeader>
-      <SidebarContent>
-      </SidebarContent>
-      <SidebarFooter>
-      </SidebarFooter>
+    <Sidebar {...props}>
+      <SidebarHeader />
+      <SidebarContent />
+      <SidebarFooter />
       <SidebarRail />
     </Sidebar>
   )

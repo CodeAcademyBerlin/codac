@@ -2,10 +2,10 @@ import './globals.css'
 
 import { GeistSans } from 'geist/font'
 
-import { Toaster } from '@/components/ui/toaster'
+import { auth } from '@/app/auth'
 import AuthProvider from '@/components/providers/session-provider'
 import { ThemeProvider } from '@/components/providers/theme-provider'
-import { auth } from '@/app/auth'
+import { Toaster } from '@/components/ui/toaster'
 
 const title = 'codac - Learning Management System'
 const description =
@@ -18,7 +18,7 @@ export const metadata = {
     card: 'summary_large_image',
     title,
     description,
-  }
+  },
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
