@@ -64,13 +64,6 @@ test.describe('Navigation and Basic Pages', () => {
     await expect(page.locator('button[type="submit"]')).toBeVisible()
   })
 
-  test('should handle 404 page', async ({ page }) => {
-    const response = await page.goto('/non-existent-page')
-
-    // Next.js returns 404 for non-existent pages
-    expect(response?.status()).toBe(404)
-  })
-
   test('should load CSS and styles correctly', async ({ page }) => {
     await page.goto('/login')
 

@@ -1,10 +1,10 @@
-import { SidebarProvider } from '@/components/ui/sidebar'
+import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar'
 import '@/app/globals.css'
 
 import { AppSidebar } from '@/components/app-sidebar'
 import Header from '@/components/header'
 
-const title = 'Admin Page'
+const title = 'Dashboard'
 const description = ''
 
 export const metadata = {
@@ -15,17 +15,16 @@ export const metadata = {
     title,
     description,
   },
-  metadataBase: new URL('https://nextjs-postgres-auth.vercel.app'),
 }
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main className="w-full">
+      <SidebarInset>
         <Header />
         {children}
-      </main>
+      </SidebarInset>
     </SidebarProvider>
   )
 }

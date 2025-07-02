@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signIn } from 'next-auth/react'
@@ -30,6 +31,7 @@ interface AuthError {
 }
 
 export default function LoginForm() {
+  const [isLoading, setIsLoading] = useState(false)
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -39,20 +41,25 @@ export default function LoginForm() {
   })
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    const res = await signIn('credentials', {
-      redirect: false,
-      email: data.email,
-      password: data.password,
-    })
-    if (res?.error) {
-      toast({
-        variant: 'destructive',
-        title: 'Uh oh! Something went wrong.',
-        description: (res as AuthError).code,
+    setIsLoading(true)
+    try {
+      const res = await signIn('credentials', {
+        redirect: false,
+        email: data.email,
+        password: data.password,
       })
-      form.setError('password', { type: 'manual', message: (res as AuthError).code })
-    } else {
-      window.location.href = '/'
+      if (res?.error) {
+        toast({
+          variant: 'destructive',
+          title: 'Uh oh! Something went wrong.',
+          description: (res as AuthError).code,
+        })
+        form.setError('password', { type: 'manual', message: (res as AuthError).code })
+      } else {
+        window.location.href = '/'
+      }
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -73,7 +80,7 @@ export default function LoginForm() {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="Email" {...field} />
+                      <Input type="email" placeholder="Email" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -92,14 +99,14 @@ export default function LoginForm() {
                     </div>
 
                     <FormControl>
-                      <Input placeholder="Password" {...field} />
+                      <Input type="password" placeholder="Password" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full">
-                Login
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? 'Logging in...' : 'Login'}
               </Button>
 
               <Button
