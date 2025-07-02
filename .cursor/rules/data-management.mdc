@@ -1,0 +1,23 @@
+---
+description: Interaction with the database.
+globs: **/*.{js,jsx,ts,tsx}
+alwaysApply: false
+---
+- Interact with the database exclusively using Drizzle ORM client
+- Leverage Drizzle's generated types for type safety
+- Use the centralized Drizzle client from `app/db.ts` and schema from `db/schema.ts`
+- Implement data operations in separate layers:
+  - `/actions` for mutations (Create, Update, Delete operations)
+  - Direct database queries in components/pages for read operations
+- Use Drizzle's query methods (select, insert, update, delete) with proper type safety
+- Apply proper error handling for database operations using try-catch blocks
+- Implement transaction support using Drizzle's transaction API when needed
+- Use Drizzle's select with specific fields for performance optimization
+- Follow the established patterns for server actions with Zod validation
+- Implement proper caching strategies for read operations using Next.js caching
+- Use database-level constraints and validation defined in the schema
+- Handle relationship management using Drizzle's relational queries
+- Use proper indexing for performance-critical queries
+- Use Drizzle enums for consistent data validation (userRoleEnum, postStatusEnum, etc.)
+- Leverage Drizzle's JSONB support for rich content storage (Plate.js content)
+- Follow the established connection pattern using postgres client with connection pooling
