@@ -3,6 +3,22 @@ description:
 globs: 
 alwaysApply: false
 ---
+---
+description: Testing guidelines for Jest, React Testing Library, and Playwright end-to-end testing
+globs: 
+  - "**/*.test.ts"
+  - "**/*.test.tsx"
+  - "**/*.spec.ts" 
+  - "**/*.spec.tsx"
+  - "__tests__/**/*"
+  - "e2e/**/*"
+  - "jest.config.ts"
+  - "jest.setup.ts"
+  - "playwright.config.ts"
+  - "playwright-report/**/*"
+  - "test-results/**/*"
+alwaysApply: false
+---
 ## Testing Guidelines
 
 - Write tests for all critical business logic and server actions
@@ -25,4 +41,7 @@ alwaysApply: false
 - Test user interactions and form submissions
 - Use proper component testing isolation
 - Maintain test data separate from production data
+- Use Playwright MCP tools for enhanced test automation and debugging
+- Leverage MCP for intelligent test generation and maintenance
+- Integrate MCP tools for cross-browser testing consistency
 

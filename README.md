@@ -400,7 +400,7 @@ git reset --soft HEAD~1
 - **GitHub Discussions**: Ask questions about contributing
 - **Issues**: Report bugs or request features
 - **Discord/Slack**: Real-time chat with the community
-- **Documentation**: Check our [Contributing Guide](CONTRIBUTING.md)
+- **Documentation**: Check our [Contributing Guide](./docs/dev/contributing.md)
 
 Remember: **Everyone was a beginner once!** The codac community is here to help you learn and grow as a developer.
 
@@ -438,7 +438,7 @@ All contributors are recognized in our project! No matter how small your contrib
 
 ## 📜 Code of Conduct
 
-We are committed to providing a welcoming and inclusive environment for all contributors. Please read our [Code of Conduct](CODE_OF_CONDUCT.md) to understand our community standards.
+We are committed to providing a welcoming and inclusive environment for all contributors. Please read our [Code of Conduct](./docs/dev/CODE_OF_CONDUCT.md) to understand our community standards.
 
 ## 📄 License
 

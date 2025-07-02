@@ -140,6 +140,15 @@ Suggest fix maintaining consistency with our codebase.
 4. **Documentation**: AI-generated docs following project standards
 5. **Testing**: AI-assisted test creation and validation
 
+### AI Planning Workflow
+
+Before proposing implementation plans:
+1. Ask 4-6 clarifying questions based on your findings
+2. Draft a comprehensive plan of action and seek approval
+3. If feedback is provided, revise the plan and ask for approval again
+4. Once approved, implement all steps in that plan
+5. After completing each phase/step, mention what was completed and remaining phases
+
 ### Monitoring AI Effectiveness
 
 - Track which types of requests work best
