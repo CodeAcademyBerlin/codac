@@ -86,12 +86,6 @@ graph TD
 Required secrets in your GitHub repository:
 
 ```bash
-# Optional: For enhanced coverage reporting
-CODECOV_TOKEN=your_codecov_token
-
-# Optional: For Slack notifications in nightly tests
-SLACK_WEBHOOK_URL=your_slack_webhook_url
-
 # Production environment variables (if needed for build)
 NEXTAUTH_SECRET=your_nextauth_secret
 ```
