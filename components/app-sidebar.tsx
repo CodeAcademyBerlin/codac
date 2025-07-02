@@ -1,89 +1,85 @@
-'use client'
+"use client"
 
+import * as React from "react"
 import {
-  Home,
-  Settings,
+  BarChart3,
   User,
   GraduationCap,
-} from 'lucide-react'
-import type * as React from 'react'
-import { useSession } from 'next-auth/react'
+  type LucideIcon,
+} from "lucide-react"
 
-import { NavMain } from './nav-main'
-import { NavProjects } from './nav-projects'
-import { NavShortcuts, quickShortcuts } from './nav-shortcuts'
-import { NavUser } from './nav-user'
-import { TeamSwitcher } from './team-switcher'
-import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail, SidebarSeparator } from './ui/sidebar'
+import { NavMain } from "@/components/nav-main"
+import { NavUser } from "@/components/nav-user"
+import { TeamSwitcher } from "@/components/team-switcher"
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarRail,
+} from "@/components/ui/sidebar"
+import { UserRole } from "@/lib/user-roles"
+
+interface NavItem {
+  title: string
+  url: string
+  icon: LucideIcon
+  isActive?: boolean
+  items?: {
+    title: string
+    url: string
+  }[]
+}
+
+// Get navigation data - only for existing pages
+const getNavData = () => {
+  const navMain: NavItem[] = [
+    {
+      title: "Dashboard",
+      url: "/",
+      icon: BarChart3,
+      isActive: true,
+    },
+    {
+      title: "Profile",
+      url: "/profile",
+      icon: User,
+    },
+  ]
+
+  return {
+    navMain,
+  }
+}
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { data: session } = useSession()
+  const navData = getNavData()
 
-  // Simplified data for testing sidebar functionality
-  const displayUser = {
-    name: session?.user?.name || 'User',
-    email: session?.user?.email || 'user@example.com',
-    avatar: session?.user?.image || '/images/user.png',
+  // Default user data - in real app, this would come from session
+  const defaultUser = {
+    name: "Student",
+    email: "student@codeacademy.berlin",
+    avatar: "/images/user.png",
+    role: 'student' as UserRole,
   }
 
-  const displayTeam = {
-    name: 'Code Academy Berlin',
+  // Organization data for Code Academy Berlin
+  const organization = {
+    name: "Code Academy Berlin",
     logo: GraduationCap,
-    plan: 'Student',
+    plan: "Education",
   }
-
-  // Simplified navigation data with only implemented routes
-  const navMainData = [
-    {
-      title: 'Dashboard',
-      url: '/dashboard',
-      icon: Home,
-      isActive: true,
-      items: [
-        {
-          title: 'Overview',
-          url: '/dashboard',
-        },
-      ],
-    },
-    {
-      title: 'Settings',
-      url: '/profile',
-      icon: Settings,
-      items: [
-        {
-          title: 'Profile',
-          url: '/profile',
-        },
-      ],
-    },
-  ]
-
-  // Simplified projects data
-  const projectsData = [
-    {
-      name: 'Current Learning Path',
-      url: '/dashboard',
-      icon: User,
-      status: 'active' as const,
-      progress: 75,
-    },
-  ]
 
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={[displayTeam]} />
+        <TeamSwitcher teams={[organization]} />
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={navMainData} />
-        <SidebarSeparator />
-        <NavProjects projects={projectsData} />
-        <SidebarSeparator />
-        <NavShortcuts shortcuts={quickShortcuts} />
+        <NavMain items={navData.navMain} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={displayUser} />
+        <NavUser user={defaultUser} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

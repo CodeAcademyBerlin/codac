@@ -14,26 +14,127 @@ import {
     Clock,
     AlertCircle,
     CheckCircle,
-    Activity
+    Activity,
+    Heart,
+    Shield,
+    BarChart3,
+    MessageSquare
 } from 'lucide-react'
 import * as React from 'react'
 import { auth } from '@/app/auth'
+import { UserRole, getRolePermissions } from '@/lib/user-roles'
+import { UserRoleBadge } from '@/components/user-role-badge'
 
 export default async function Dashboard() {
     const session = await auth()
-    const userName = session?.user?.name?.split(' ')[0] || 'Student'
+    const userName = session?.user?.name?.split(' ')[0] || 'User'
+    const userRole = (session?.user as any)?.role as UserRole || 'student'
+    const permissions = getRolePermissions(userRole)
+
+    // Role-based greeting and description
+    const getRoleBasedWelcome = () => {
+        switch (userRole) {
+            case 'student':
+                return {
+                    greeting: `Welcome back, ${userName}! 📚`,
+                    description: 'Continue your learning journey with Code Academy Berlin'
+                }
+            case 'alumni':
+                return {
+                    greeting: `Hello ${userName}! 🎓`,
+                    description: 'Stay connected with the Code Academy Berlin community'
+                }
+            case 'mentor':
+                return {
+                    greeting: `Welcome back, ${userName}! 💡`,
+                    description: 'Guide and inspire the next generation of developers'
+                }
+            case 'admin':
+                return {
+                    greeting: `Dashboard Overview, ${userName} ⚡`,
+                    description: 'Monitor and manage the Code Academy Berlin platform'
+                }
+        }
+    }
+
+    const welcome = getRoleBasedWelcome()
+
+    // Role-based stats
+    const getRoleBasedStats = () => {
+        switch (userRole) {
+            case 'student':
+                return [
+                    { title: 'Active Courses', value: '4', change: '+2 from last month', icon: BookOpen },
+                    { title: 'Assignments Due', value: '3', change: '2 due this week', icon: Target },
+                    { title: 'Study Streak', value: '12', change: 'days in a row', icon: Award },
+                    { title: 'Study Hours', value: '28.5', change: 'this week', icon: Clock }
+                ]
+            case 'alumni':
+                return [
+                    { title: 'Community Posts', value: '8', change: '+3 this month', icon: MessageSquare },
+                    { title: 'Mentoring Sessions', value: '2', change: 'upcoming', icon: Heart },
+                    { title: 'Network Connections', value: '45', change: '+5 new', icon: Users },
+                    { title: 'Profile Views', value: '124', change: 'this month', icon: Activity }
+                ]
+            case 'mentor':
+                return [
+                    { title: 'Active Mentees', value: '6', change: '+1 this month', icon: Users },
+                    { title: 'Sessions This Week', value: '8', change: '2 pending', icon: Calendar },
+                    { title: 'Success Rate', value: '94%', change: 'student completion', icon: Award },
+                    { title: 'Hours Mentored', value: '32', change: 'this month', icon: Clock }
+                ]
+            case 'admin':
+                return [
+                    { title: 'Total Users', value: '1,247', change: '+23 this week', icon: Users },
+                    { title: 'Active Courses', value: '18', change: '3 new courses', icon: BookOpen },
+                    { title: 'System Health', value: '98%', change: 'uptime', icon: Activity },
+                    { title: 'Support Tickets', value: '4', change: '2 resolved today', icon: AlertCircle }
+                ]
+        }
+    }
+
+    const stats = getRoleBasedStats()
+
+    // Role-based alert
+    const getRoleBasedAlert = () => {
+        switch (userRole) {
+            case 'student':
+                return {
+                    title: 'Upcoming: Web Development Bootcamp',
+                    description: 'Your intensive bootcamp starts Monday, December 9th. Make sure to complete the pre-work assignments.'
+                }
+            case 'alumni':
+                return {
+                    title: 'Alumni Networking Event',
+                    description: 'Join us for the monthly alumni meetup on December 15th. Connect with fellow graduates and share your experiences.'
+                }
+            case 'mentor':
+                return {
+                    title: 'New Mentee Assignment',
+                    description: 'You have been assigned 2 new mentees for the upcoming cohort. Please review their profiles and schedule initial meetings.'
+                }
+            case 'admin':
+                return {
+                    title: 'System Maintenance Scheduled',
+                    description: 'Planned maintenance on December 10th from 2-4 AM UTC. All users have been notified via email.'
+                }
+        }
+    }
+
+    const alertInfo = getRoleBasedAlert()
 
     return (
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
             {/* Welcome Header */}
             <div className="flex items-center justify-between space-y-2">
                 <div>
-                    <h1 className="text-3xl font-bold tracking-tight">Welcome back, {userName}! 👋</h1>
+                    <h1 className="text-3xl font-bold tracking-tight">{welcome.greeting}</h1>
                     <p className="text-muted-foreground">
-                        Continue your learning journey with Code Academy Berlin
+                        {welcome.description}
                     </p>
                 </div>
                 <div className="flex items-center space-x-2">
+                    <UserRoleBadge role={userRole} />
                     <Badge variant="secondary" className="text-sm">
                         <Activity className="w-4 h-4 mr-1" />
                         Online
@@ -43,370 +144,122 @@ export default async function Dashboard() {
 
             {/* Quick Stats */}
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                <Card className="transition-smooth hover:shadow-lg">
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">Courses Active</CardTitle>
-                        <BookOpen className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold">4</div>
-                        <p className="text-xs text-muted-foreground">
-                            +2 from last month
-                        </p>
-                    </CardContent>
-                </Card>
-
-                <Card className="transition-smooth hover:shadow-lg">
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">Assignments Due</CardTitle>
-                        <Target className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold">3</div>
-                        <p className="text-xs text-muted-foreground">
-                            2 due this week
-                        </p>
-                    </CardContent>
-                </Card>
-
-                <Card className="transition-smooth hover:shadow-lg">
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">Study Streak</CardTitle>
-                        <Award className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold">12</div>
-                        <p className="text-xs text-muted-foreground">
-                            days in a row
-                        </p>
-                    </CardContent>
-                </Card>
-
-                <Card className="transition-smooth hover:shadow-lg">
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">Study Hours</CardTitle>
-                        <Clock className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold">28.5</div>
-                        <p className="text-xs text-muted-foreground">
-                            this week
-                        </p>
-                    </CardContent>
-                </Card>
+                {stats.map((stat, index) => (
+                    <Card key={index} className="transition-all duration-200 hover:shadow-lg hover:scale-[1.02]">
+                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                            <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
+                            <stat.icon className="h-4 w-4 text-muted-foreground" />
+                        </CardHeader>
+                        <CardContent>
+                            <div className="text-2xl font-bold">{stat.value}</div>
+                            <p className="text-xs text-muted-foreground">
+                                {stat.change}
+                            </p>
+                        </CardContent>
+                    </Card>
+                ))}
             </div>
 
-            {/* Important Alert */}
+            {/* Role-based Alert */}
             <Alert className="border-l-4 border-l-primary">
                 <AlertCircle className="h-4 w-4" />
-                <AlertTitle>Upcoming: Web Development Bootcamp</AlertTitle>
+                <AlertTitle>{alertInfo.title}</AlertTitle>
                 <AlertDescription>
-                    Your intensive bootcamp starts Monday, December 9th. Make sure to complete the pre-work assignments.
+                    {alertInfo.description}
                 </AlertDescription>
             </Alert>
 
-            {/* Main Content Tabs */}
+            {/* Main Content Tabs - Role-based */}
             <Tabs defaultValue="overview" className="w-full">
                 <TabsList className="grid w-full grid-cols-4">
                     <TabsTrigger value="overview">Overview</TabsTrigger>
-                    <TabsTrigger value="courses">Courses</TabsTrigger>
-                    <TabsTrigger value="assignments">Assignments</TabsTrigger>
-                    <TabsTrigger value="progress">Progress</TabsTrigger>
+                    {permissions.canViewCourses && <TabsTrigger value="courses">Courses</TabsTrigger>}
+                    {userRole === 'mentor' && <TabsTrigger value="mentoring">Mentoring</TabsTrigger>}
+                    {userRole === 'admin' && <TabsTrigger value="admin">Admin</TabsTrigger>}
+                    {(userRole === 'student' || userRole === 'alumni') && <TabsTrigger value="progress">Progress</TabsTrigger>}
                 </TabsList>
 
                 <TabsContent value="overview" className="space-y-4">
-                    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-                        {/* Current Courses */}
-                        <Card className="col-span-4">
-                            <CardHeader>
-                                <CardTitle className="flex items-center gap-2">
-                                    <BookOpen className="h-5 w-5" />
-                                    Current Courses
-                                </CardTitle>
-                                <CardDescription>
-                                    Your active learning paths and progress
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <div className="space-y-3">
-                                    <div className="flex items-center justify-between">
-                                        <div className="space-y-1">
-                                            <p className="text-sm font-medium leading-none">
-                                                Full Stack JavaScript
-                                            </p>
-                                            <p className="text-sm text-muted-foreground">
-                                                Module 3: React & State Management
-                                            </p>
-                                        </div>
-                                        <div className="flex items-center gap-2">
-                                            <Progress value={75} className="w-[100px]" />
-                                            <span className="text-sm font-medium">75%</span>
+                    {/* Role-based overview content */}
+                    {userRole === 'student' && (
+                        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+                            <Card className="col-span-4">
+                                <CardHeader>
+                                    <CardTitle className="flex items-center gap-2">
+                                        <BookOpen className="h-5 w-5" />
+                                        Current Courses
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <div className="space-y-3">
+                                        <div className="flex items-center justify-between">
+                                            <div className="space-y-1">
+                                                <p className="text-sm font-medium">Full Stack JavaScript</p>
+                                                <p className="text-sm text-muted-foreground">Module 3: React & State Management</p>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <Progress value={75} className="w-[100px]" />
+                                                <span className="text-sm font-medium">75%</span>
+                                            </div>
                                         </div>
                                     </div>
+                                </CardContent>
+                            </Card>
 
-                                    <div className="flex items-center justify-between">
-                                        <div className="space-y-1">
-                                            <p className="text-sm font-medium leading-none">
-                                                Database Design
-                                            </p>
-                                            <p className="text-sm text-muted-foreground">
-                                                Module 2: Advanced SQL Queries
-                                            </p>
-                                        </div>
-                                        <div className="flex items-center gap-2">
-                                            <Progress value={60} className="w-[100px]" />
-                                            <span className="text-sm font-medium">60%</span>
-                                        </div>
-                                    </div>
+                            <Card className="col-span-3">
+                                <CardHeader>
+                                    <CardTitle>Quick Actions</CardTitle>
+                                </CardHeader>
+                                <CardContent className="grid gap-2">
+                                    <Button className="w-full justify-start" variant="ghost">
+                                        <BookOpen className="mr-2 h-4 w-4" />
+                                        Continue Learning
+                                    </Button>
+                                    <Button className="w-full justify-start" variant="ghost">
+                                        <Target className="mr-2 h-4 w-4" />
+                                        View Assignments
+                                    </Button>
+                                </CardContent>
+                            </Card>
+                        </div>
+                    )}
 
-                                    <div className="flex items-center justify-between">
-                                        <div className="space-y-1">
-                                            <p className="text-sm font-medium leading-none">
-                                                DevOps Fundamentals
-                                            </p>
-                                            <p className="text-sm text-muted-foreground">
-                                                Module 1: Docker & Containerization
-                                            </p>
-                                        </div>
-                                        <div className="flex items-center gap-2">
-                                            <Progress value={30} className="w-[100px]" />
-                                            <span className="text-sm font-medium">30%</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </CardContent>
-                        </Card>
+                    {userRole === 'mentor' && (
+                        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle className="flex items-center gap-2">
+                                        <Users className="h-5 w-5" />
+                                        Active Mentees
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <div className="text-2xl font-bold">6</div>
+                                    <p className="text-xs text-muted-foreground">Across 3 cohorts</p>
+                                </CardContent>
+                            </Card>
+                        </div>
+                    )}
 
-                        {/* Quick Actions */}
-                        <Card className="col-span-3">
-                            <CardHeader>
-                                <CardTitle>Quick Actions</CardTitle>
-                                <CardDescription>
-                                    Access your most used features
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent className="grid gap-2">
-                                <Button className="w-full justify-start" variant="ghost">
-                                    <BookOpen className="mr-2 h-4 w-4" />
-                                    Continue Learning
-                                </Button>
-                                <Button className="w-full justify-start" variant="ghost">
-                                    <Target className="mr-2 h-4 w-4" />
-                                    View Assignments
-                                </Button>
-                                <Button className="w-full justify-start" variant="ghost">
-                                    <Users className="mr-2 h-4 w-4" />
-                                    Join Study Group
-                                </Button>
-                                <Button className="w-full justify-start" variant="ghost">
-                                    <Calendar className="mr-2 h-4 w-4" />
-                                    Schedule Session
-                                </Button>
-                            </CardContent>
-                        </Card>
-                    </div>
+                    {userRole === 'admin' && (
+                        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle className="flex items-center gap-2">
+                                        <BarChart3 className="h-5 w-5" />
+                                        Platform Analytics
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <div className="text-2xl font-bold">98.5%</div>
+                                    <p className="text-xs text-muted-foreground">User satisfaction</p>
+                                </CardContent>
+                            </Card>
+                        </div>
+                    )}
                 </TabsContent>
 
-                <TabsContent value="courses" className="space-y-4">
-                    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                        <Card className="transition-smooth hover:shadow-lg">
-                            <CardHeader>
-                                <div className="flex items-center justify-between">
-                                    <CardTitle className="text-lg">Full Stack JavaScript</CardTitle>
-                                    <Badge variant="default">Active</Badge>
-                                </div>
-                                <CardDescription>
-                                    Complete web development with modern JavaScript
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <div className="space-y-3">
-                                    <Progress value={75} className="w-full" />
-                                    <div className="flex justify-between items-center">
-                                        <span className="text-sm text-muted-foreground">Module 3 of 5</span>
-                                        <span className="text-sm font-medium">75% Complete</span>
-                                    </div>
-                                    <Button className="w-full" size="sm">Continue Learning</Button>
-                                </div>
-                            </CardContent>
-                        </Card>
-
-                        <Card className="transition-smooth hover:shadow-lg">
-                            <CardHeader>
-                                <div className="flex items-center justify-between">
-                                    <CardTitle className="text-lg">Database Design</CardTitle>
-                                    <Badge variant="secondary">In Progress</Badge>
-                                </div>
-                                <CardDescription>
-                                    Master SQL and NoSQL database concepts
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <div className="space-y-3">
-                                    <Progress value={60} className="w-full" />
-                                    <div className="flex justify-between items-center">
-                                        <span className="text-sm text-muted-foreground">Module 2 of 4</span>
-                                        <span className="text-sm font-medium">60% Complete</span>
-                                    </div>
-                                    <Button className="w-full" size="sm" variant="outline">Continue Learning</Button>
-                                </div>
-                            </CardContent>
-                        </Card>
-
-                        <Card className="transition-smooth hover:shadow-lg">
-                            <CardHeader>
-                                <div className="flex items-center justify-between">
-                                    <CardTitle className="text-lg">DevOps Fundamentals</CardTitle>
-                                    <Badge variant="outline">Started</Badge>
-                                </div>
-                                <CardDescription>
-                                    Learn deployment and infrastructure basics
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <div className="space-y-3">
-                                    <Progress value={30} className="w-full" />
-                                    <div className="flex justify-between items-center">
-                                        <span className="text-sm text-muted-foreground">Module 1 of 6</span>
-                                        <span className="text-sm font-medium">30% Complete</span>
-                                    </div>
-                                    <Button className="w-full" size="sm" variant="outline">Continue Learning</Button>
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </div>
-                </TabsContent>
-
-                <TabsContent value="assignments" className="space-y-4">
-                    <div className="space-y-4">
-                        <Card>
-                            <CardHeader>
-                                <CardTitle className="flex items-center justify-between">
-                                    <span>Pending Assignments</span>
-                                    <Badge variant="destructive">3 Due Soon</Badge>
-                                </CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <div className="space-y-4">
-                                    <div className="flex items-center justify-between p-3 border rounded-lg">
-                                        <div className="space-y-1">
-                                            <p className="font-medium">React Component Library Project</p>
-                                            <p className="text-sm text-muted-foreground">Full Stack JavaScript</p>
-                                        </div>
-                                        <div className="flex items-center gap-2">
-                                            <Badge variant="destructive">Due Tomorrow</Badge>
-                                            <Button size="sm">View</Button>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-center justify-between p-3 border rounded-lg">
-                                        <div className="space-y-1">
-                                            <p className="font-medium">Database Schema Design</p>
-                                            <p className="text-sm text-muted-foreground">Database Design</p>
-                                        </div>
-                                        <div className="flex items-center gap-2">
-                                            <Badge variant="secondary">Due Dec 10</Badge>
-                                            <Button size="sm" variant="outline">View</Button>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-center justify-between p-3 border rounded-lg">
-                                        <div className="space-y-1">
-                                            <p className="font-medium">Docker Setup Assignment</p>
-                                            <p className="text-sm text-muted-foreground">DevOps Fundamentals</p>
-                                        </div>
-                                        <div className="flex items-center gap-2">
-                                            <Badge variant="outline">Due Dec 12</Badge>
-                                            <Button size="sm" variant="outline">View</Button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </div>
-                </TabsContent>
-
-                <TabsContent value="progress" className="space-y-4">
-                    <div className="grid gap-4 md:grid-cols-2">
-                        <Card>
-                            <CardHeader>
-                                <CardTitle className="flex items-center gap-2">
-                                    <TrendingUp className="h-5 w-5" />
-                                    Overall Progress
-                                </CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <div className="space-y-4">
-                                    <div className="space-y-2">
-                                        <div className="flex justify-between">
-                                            <span className="text-sm font-medium">Course Completion</span>
-                                            <span className="text-sm">55%</span>
-                                        </div>
-                                        <Progress value={55} className="w-full" />
-                                    </div>
-
-                                    <div className="space-y-2">
-                                        <div className="flex justify-between">
-                                            <span className="text-sm font-medium">Assignment Completion</span>
-                                            <span className="text-sm">78%</span>
-                                        </div>
-                                        <Progress value={78} className="w-full" />
-                                    </div>
-
-                                    <div className="space-y-2">
-                                        <div className="flex justify-between">
-                                            <span className="text-sm font-medium">Skill Development</span>
-                                            <span className="text-sm">63%</span>
-                                        </div>
-                                        <Progress value={63} className="w-full" />
-                                    </div>
-                                </div>
-                            </CardContent>
-                        </Card>
-
-                        <Card>
-                            <CardHeader>
-                                <CardTitle className="flex items-center gap-2">
-                                    <Award className="h-5 w-5" />
-                                    Recent Achievements
-                                </CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <div className="space-y-3">
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
-                                            <Award className="h-4 w-4 text-yellow-600" />
-                                        </div>
-                                        <div>
-                                            <p className="text-sm font-medium">First Project Complete</p>
-                                            <p className="text-xs text-muted-foreground">Completed your first coding project</p>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                                            <CheckCircle className="h-4 w-4 text-green-600" />
-                                        </div>
-                                        <div>
-                                            <p className="text-sm font-medium">Study Streak</p>
-                                            <p className="text-xs text-muted-foreground">12 days of consistent learning</p>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                                            <Users className="h-4 w-4 text-blue-600" />
-                                        </div>
-                                        <div>
-                                            <p className="text-sm font-medium">Community Helper</p>
-                                            <p className="text-xs text-muted-foreground">Helped 5 fellow students</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </div>
-                </TabsContent>
+                {/* Additional tab contents would go here based on role */}
             </Tabs>
         </div>
     )
