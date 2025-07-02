@@ -95,28 +95,12 @@ jobs:
       - name: Install Playwright browsers
         run: pnpm exec playwright install chromium --with-deps
 
-      - name: Build application
-        run: pnpm build
-        env:
-          NEXTAUTH_SECRET: test-secret-key-for-pr
-          NEXTAUTH_URL: http://localhost:3000
-
-      - name: Start application
-        run: pnpm start &
-        env:
-          NODE_ENV: production
-          PORT: 3000
-          NEXTAUTH_SECRET: test-secret-key-for-pr
-          NEXTAUTH_URL: http://localhost:3000
-
-      - name: Wait for application to be ready
-        run: |
-          timeout 60s bash -c 'until curl -f http://localhost:3000; do sleep 2; done'
-
       - name: Run critical e2e tests
         run: pnpm playwright test --project=chromium auth.spec.ts navigation.spec.ts
         env:
           CI: true
+          NEXTAUTH_SECRET: test-secret-key-for-pr
+          NEXTAUTH_URL: http://localhost:3000
 
       - name: Upload test results on failure
         uses: actions/upload-artifact@v4

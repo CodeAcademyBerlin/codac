@@ -105,31 +105,12 @@ jobs:
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps
 
-      - name: Build application
-        run: pnpm build
-        env:
-          # Add any required build environment variables here
-          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET || 'test-secret-key-for-ci' }}
-          NEXTAUTH_URL: http://localhost:3000
-
-      - name: Start application
-        run: pnpm start &
-        env:
-          NODE_ENV: production
-          PORT: 3000
-          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET || 'test-secret-key-for-ci' }}
-          NEXTAUTH_URL: http://localhost:3000
-
-      - name: Wait for application to be ready
-        run: |
-          echo "Waiting for application to start..."
-          timeout 60s bash -c 'until curl -f http://localhost:3000; do sleep 2; done'
-          echo "Application is ready!"
-
       - name: Run e2e tests
         run: pnpm test:e2e
         env:
           CI: true
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET || 'test-secret-key-for-ci' }}
+          NEXTAUTH_URL: http://localhost:3000
 
       - name: Upload Playwright report
         uses: actions/upload-artifact@v4
