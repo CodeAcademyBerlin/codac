@@ -6,13 +6,6 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "@tailwindcss/oxide"
-    ],
-    "ignoredBuiltDependencies": [
-      "@biomejs/biome",
-      "bufferutil",
-      "esbuild",
-      "sharp",
-      "unrs-resolver"
     ]
   },
   "scripts": {
