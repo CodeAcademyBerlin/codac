@@ -10,9 +10,7 @@ codac empowers Code Academy Berlin students and alumni to learn, collaborate, an
 
 ### 📚 Learning Management System
 
-- **Rich Content Editor** - for creating engaging educational content with advanced formatting, media embedding, and collaborative editing capabilities
-- **Document Management** - Comprehensive document creation, editing, and sharing system with version control and real-time collaboration
-- **Course Structure** - Organized learning paths with projects, lessons, and assignments
+- **Course Structure** - Organized learning paths with projects, lessons, and quizzes
 - **Progress Tracking** - Detailed analytics on learning progress, completion rates, and time spent on various activities
 - **Assignment System** - Create, submit, and grade assignments with integrated feedback mechanisms
 - **Resource Library** - Centralized repository of learning materials, code examples, and references
@@ -47,14 +45,15 @@ codac empowers Code Academy Berlin students and alumni to learn, collaborate, an
 - **[Next.js 15](https://nextjs.org/)** for performance and scalability.
 - **[Auth.js](https://auth.js.org/)** for authentication.
 - **[Drizzle ORM](https://orm.drizzle.team/)** for type-safe database management.
-- **[SQLite](https://www.sqlite.org/)** for lightweight, serverless database management.
+- **[PostgreSQL](https://www.postgresql.org/)** for reliable and scalable database solutions.
 - **[Shadcn/UI](https://ui.shadcn.com/)** for beautiful, customizable components.
 - **[Biome](https://biomejs.dev/)** for **Formatting and Linting**
 - **[Jest](https://jestjs.io/)** A testing framework for ensuring your app works as expected.
 - **React Hook Form**: A library for managing form state and validation in React applications
 - **Zod**: A TypeScript-first schema declaration and validation library
-- **Zustand**: Simple state management
 - **Nuqs**: Type-safe URL state management
+- **[Platejs] (https://platejs.org)Rich Content Editor** - for creating engaging educational content with advanced formatting, media embedding, and collaborative editing capabilities
+- **Document Management** - Comprehensive document creation, editing, and sharing system with version control and real-time collaboration
 
 ## 🚀 Quick Start
 
@@ -63,7 +62,7 @@ codac empowers Code Academy Berlin students and alumni to learn, collaborate, an
 Make sure you have the following installed on your system:
 
 - **Node.js** (v20 or higher) - [Download here](https://nodejs.org/)
-- **pnpm** (recommended) or npm - Install with `npm install -g pnpm`
+- **pnpm** - Install with `npm install -g pnpm`
 - **Git** - [Download here](https://git-scm.com/)
 
 ### Installation
