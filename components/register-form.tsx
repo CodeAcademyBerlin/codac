@@ -12,6 +12,7 @@ import {
 // import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input'
 import Link from 'next/link'
+import { useState } from 'react'
 
 import { register } from '@/actions/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -34,6 +35,7 @@ const formSchema = z
 
 export default function RegisterForm() {
   const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -45,11 +47,16 @@ export default function RegisterForm() {
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const res = await register(values)
-    if (res.message !== 'success') {
-      form.setError('email', { type: 'manual', message: res.message })
-    } else {
-      router.push('/login')
+    setIsLoading(true)
+    try {
+      const res = await register(values)
+      if (res.message !== 'success') {
+        form.setError('email', { type: 'manual', message: res.message })
+      } else {
+        router.push('/login')
+      }
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -114,8 +121,8 @@ export default function RegisterForm() {
                 </FormItem>
               )}
             />
-            <Button className="w-full" type="submit">
-              Create Account
+            <Button className="w-full" type="submit" disabled={isLoading}>
+              {isLoading ? 'Creating Account...' : 'Create Account'}
             </Button>
           </form>
         </Form>

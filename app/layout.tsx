@@ -1,9 +1,10 @@
 import './globals.css'
 
-import { GeistSans } from 'geist/font/sans'
+import { GeistSans } from 'geist/font'
 
 import { Toaster } from '@/components/ui/toaster'
-import { SessionProvider } from 'next-auth/react'
+import AuthProvider from '@/components/providers/session-provider'
+import { ThemeProvider } from '@/components/providers/theme-provider'
 
 const title = 'codac - Learning Management System'
 const description =
@@ -16,16 +17,22 @@ export const metadata = {
     card: 'summary_large_image',
     title,
     description,
-  },
-  metadataBase: new URL('https://codac.vercel.app'),
+  }
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={GeistSans.variable}>
-        <SessionProvider>{children}</SessionProvider>
-        <Toaster />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <AuthProvider session={null}>{children}</AuthProvider>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   )

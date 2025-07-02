@@ -4,7 +4,9 @@
   "description": "Comprehensive learning management system and community platform for Code Academy Berlin",
   "private": true,
   "pnpm": {
-    "onlyBuiltDependencies": ["@tailwindcss/oxide"],
+    "onlyBuiltDependencies": [
+      "@tailwindcss/oxide"
+    ],
     "ignoredBuiltDependencies": [
       "@biomejs/biome",
       "bufferutil",
@@ -47,8 +49,10 @@
     "@radix-ui/react-dropdown-menu": "^2.1.6",
     "@radix-ui/react-label": "^2.1.2",
     "@radix-ui/react-navigation-menu": "^1.2.5",
+    "@radix-ui/react-progress": "^1.1.7",
     "@radix-ui/react-separator": "^1.1.2",
     "@radix-ui/react-slot": "^1.1.2",
+    "@radix-ui/react-tabs": "^1.1.12",
     "@radix-ui/react-toast": "^1.2.6",
     "@radix-ui/react-tooltip": "^1.1.8",
     "@types/node": "^22.13.8",
@@ -64,6 +68,7 @@
     "lucide-react": "^0.454.0",
     "next": "latest",
     "next-auth": "5.0.0-beta.25",
+    "next-themes": "^0.4.6",
     "nuqs": "^2.0.0",
     "platejs": "^49.0.0",
     "postgres": "^3.4.5",
