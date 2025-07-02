@@ -5,6 +5,7 @@ import { GeistSans } from 'geist/font'
 import { Toaster } from '@/components/ui/toaster'
 import AuthProvider from '@/components/providers/session-provider'
 import { ThemeProvider } from '@/components/providers/theme-provider'
+import { auth } from '@/app/auth'
 
 const title = 'codac - Learning Management System'
 const description =
@@ -20,7 +21,9 @@ export const metadata = {
   }
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const session = await auth()
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={GeistSans.variable}>
@@ -30,7 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           enableSystem
           disableTransitionOnChange
         >
-          <AuthProvider session={null}>{children}</AuthProvider>
+          <AuthProvider session={session}>{children}</AuthProvider>
           <Toaster />
         </ThemeProvider>
       </body>
